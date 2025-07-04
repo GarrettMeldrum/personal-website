@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import NavBar from '@/components/NavBar'
+import React from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,12 +17,9 @@ const geistMono = Geist_Mono({
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+      <body className="min-h-screen bg-white text-gray-900">
         <NavBar />
         <main className="max-w-4xl mx-auto px-4 py-8">{children}</main>
-        <footer className="text-center py-4 text-sm text-gray-500">
-          © 2025 Jane Doe
-        </footer>
       </body>
     </html>
   )
