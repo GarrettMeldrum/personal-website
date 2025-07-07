@@ -11,7 +11,7 @@ export default function MountaineeringIndex() {
         <div
           key={post.slug}
           className="p-4 border rounded-xl shadow-sm bg-white dark:bg-gray-900"
-        >
+          >
           <Link
             href={`/mountaineering/${post.slug}`}
             className="text-xl font-semibold text-blue-600 hover:underline"
