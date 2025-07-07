@@ -5,7 +5,8 @@ import React from 'react'
 type Project = {
   title: string
   description: string[]
-  github?: string
+  github?: string,
+  tags?: string[]
 }
 
 const projects: Project[] = [
@@ -15,7 +16,8 @@ const projects: Project[] = [
                   'On my raspberry pi, I setup a Docker environment that will host the website and run the Cloudflare tunnel.',
                   'I will utilize Next.js for the design and infrastructure.'
                 ],
-    github: 'https://github.com/GarrettMeldrum/personal-website'
+    github: 'https://github.com/GarrettMeldrum/personal-website',
+    tags: ['Next.js','Typescript','HTML/CSS']
   },
   {
     title: 'Matcha bots run with a controller script using Python',
@@ -24,22 +26,36 @@ const projects: Project[] = [
                   'When it did activate, I had scripted out the process of making executing the purchase and used a .ENV to share this on my Github.',
                   'I did this for 3 different websites and designed a controller script that terminates all bots when a purchase has been made on one.'                
     ],
-    github: 'https://github.com/GarrettMeldrum/matcha-bot'
+    github: 'https://github.com/GarrettMeldrum/matcha-bot',
+    tags: ['Python','Selenium']
   },
   {
     title: 'The game of Go using Python',
-    description: [],
-    github: 'https://github.com/GarrettMeldrum/Go-Baduk'
+    description: [  
+      'Designed the game logic to support move validation, capturing stones, and enforcing rules like ko and suicide.',
+      'Developed a GUI to visualize the board and allow two-player interaction.',
+      'Building modularlly to build Go engines later on'],
+    github: 'https://github.com/GarrettMeldrum/Go-Baduk',
+    tags: ['Python']
   },
   {
     title: 'Spotify dashboard using Python and Spotify API',
-    description: [],
-    github: 'https://github.com/GarrettMeldrum/spotify_dashboard'
+    description: [
+      'Using the Spotify API, created a listener script to watch my recent listens.',
+      'This is ran in a docker environment on my homelab.',
+      'This is streamed on a Websocket connected to my Next.js website.'
+    ],
+    github: 'https://github.com/GarrettMeldrum/spotify_dashboard',
+    tags: ['Python','Spotify API']
   },
   {
     title: 'The game of 2048',
-    description: [],
-    github: 'https://github.com/GarrettMeldrum/twenty-forty-eight'
+    description: [
+      'Built the game mechanics including grid merging, movement logic, and win/loss detection.',
+      'Implemented a basic terminal GUI to interact with the game using arrow keys.'
+    ],
+    github: 'https://github.com/GarrettMeldrum/twenty-forty-eight',
+    tags: ['Python']
   }
 ]
 
@@ -74,6 +90,19 @@ export default function ProjectsPage() {
                 <li key={i}>{item}</li>
               ))}
             </ul>
+          )}
+
+          {project.tags && (
+          <div className="flex flex-wrap mt-4 gap-2">
+            {project.tags.map((tag, i) => (
+              <span
+                key={i}
+                className="px-2 py-1 text-sm rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
           )}
         </div>
       ))}
