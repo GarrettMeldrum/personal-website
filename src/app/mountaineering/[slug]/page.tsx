@@ -1,18 +1,19 @@
-import { getPostBySlug, getAllPosts } from '@/lib/blog'
+import { getPostBySlug, getAllPosts, type Post } from '@/lib/blog'
 import { notFound } from 'next/navigation'
 import { marked } from 'marked'
 import Image from 'next/image'
 import type { Metadata, ResolvingMetadata } from 'next'
 
 type PageProps = {
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 
 // Blog post page component
-export default function BlogPostPage({ params }: PageProps) {
-  const post = getPostBySlug(params.slug)
+export default async function BlogPostPage({ params }: PageProps) {
+  const { slug } = await params
+  const post: Post = getPostBySlug(slug)
   if (!post) return notFound()
 
   const html = marked(post.content)
@@ -52,10 +53,12 @@ export function generateStaticParams() {
 
 // Set dynamic metadata based on markdown frontmatter
 export async function generateMetadata(
-  { params }: { params: { slug: string } },
-  _parent: ResolvingMetadata
+  { params }: { params: Promise<{ slug: string }> },
+  parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const post = getPostBySlug(params.slug)
+  void parent
+  const { slug } = await params
+  const post: Post = getPostBySlug(slug)
   if (!post) return {}
 
   return {
