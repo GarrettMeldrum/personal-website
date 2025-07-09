@@ -1,17 +1,17 @@
-// /src/app/mountaineering/[slug]/page.tsx
-
-import { getPostBySlug } from '@/lib/blog'
+import { getPostBySlug, getAllPosts } from '@/lib/blog'
 import { notFound } from 'next/navigation'
 import { marked } from 'marked'
 import Image from 'next/image'
+import type { Metadata, ResolvingMetadata } from 'next'
 
-type Props = {
+type PageProps = {
   params: {
     slug: string
   }
 }
 
-export default function BlogPostPage({ params }: Props) {
+// Blog post page component
+export default function BlogPostPage({ params }: PageProps) {
   const post = getPostBySlug(params.slug)
   if (!post) return notFound()
 
@@ -40,4 +40,26 @@ export default function BlogPostPage({ params }: Props) {
       </article>
     </main>
   )
+}
+
+// Generate static paths at build time
+export function generateStaticParams() {
+  const posts = getAllPosts()
+  return posts.map((post) => ({
+    slug: post.slug,
+  }))
+}
+
+// Set dynamic metadata based on markdown frontmatter
+export async function generateMetadata(
+  { params }: { params: { slug: string } },
+  _parent: ResolvingMetadata
+): Promise<Metadata> {
+  const post = getPostBySlug(params.slug)
+  if (!post) return {}
+
+  return {
+    title: post.title,
+    description: post.description || '',
+  }
 }

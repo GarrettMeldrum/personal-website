@@ -11,4 +11,4 @@ tags: ['14er','mountaineering']
 ### Total Distance: 7.41 miles  |  Total Elevation: 3,599 feet  |  Total Time: 6hrs 4m  
 <br></br>
 ## View of the kelso ridge from the standard route up Greys
-![Looking at the Kelso ridge]( /images/mountaineering/greys-and-torreys-kelso-ridge/kelso-ridge-from-standard-route-going-down-greys.jpg )
+![Looking at the Kelso ridge]( public/images/mountaineering/greys-and-torreys-kelso-ridge/kelso-ridge-from-standard-route-going-down-greys.jpg )
