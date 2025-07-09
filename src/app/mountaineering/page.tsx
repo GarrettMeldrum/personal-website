@@ -1,8 +1,8 @@
-import { getAllPosts } from '@/lib/blog'
+import { getAllPosts, type Post } from '@/lib/blog'
 import Link from 'next/link'
 
 export default function MountaineeringIndex() {
-  const posts = getAllPosts()
+  const posts: Post[] = getAllPosts()
 
   return (
     <main className="px-6 py-10 max-w-3xl mx-auto space-y-8">
