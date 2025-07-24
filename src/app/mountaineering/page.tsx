@@ -1,29 +1,32 @@
-import { getAllPosts, type Post } from '@/lib/blog'
-import Link from 'next/link'
+import { getAllPosts, type Post } from '@/lib/blog';
+import Link from 'next/link';
+import Image from 'next/image';
 
 export default function MountaineeringIndex() {
-  const posts: Post[] = getAllPosts()
+  const posts: Post[] = getAllPosts();
 
   return (
-    <main className="px-6 py-10 max-w-3xl mx-auto space-y-8">
-      <h1 className="text-3xl font-bold mb-4">Mountaineering Blog</h1>
+    <div className="px-6 py-10 mx-auto space-y-8">
+      <h1 className="text-4xl font-bold text-center">Mountaineering Blog Posts</h1>
       {posts.map((post) => (
-        <div
-          key={post.slug}
-          className="p-4 border rounded-xl shadow-sm bg-white dark:bg-gray-900"
-          >
-          <Link
-            href={`/mountaineering/${post.slug}`}
-            className="text-xl font-semibold text-blue-600 hover:underline"
-          >
-            {post.title}
+        <div key={post.slug} className="border rounded-lg p-4 shadow-md">
+          <Link href={`/mountaineering/${post.slug}`}>
+            <h2 className="text-2xl font-semibold hover:underline">{post.title}</h2>
           </Link>
-          <p className="text-gray-500 text-sm">{post.date}</p>
-          <p className="mt-2 text-gray-700 dark:text-gray-300">
-            {post.description}
-          </p>
+          <p className="text-sm text-gray-500">{post.date}</p>
+          {typeof post.image === 'string' && post.image.trim() !== '' && (
+            <div className="relative w-full max-w-md h-64 mt-2">
+              <Image
+                src={post.image}
+                alt={post.title}
+                fill
+                className="object-cover rounded-lg"
+                sizes="(max-width: 768px) 100vw, 600px"
+              />
+            </div>
+          )}
         </div>
       ))}
-    </main>
-  )
+    </div>
+  );
 }
