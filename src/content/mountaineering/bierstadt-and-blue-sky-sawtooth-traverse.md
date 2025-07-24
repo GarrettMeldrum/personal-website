@@ -2,7 +2,6 @@
 title: "Mount Bierstadt and Blue Sky via the Sawtooth Traverse"
 slug: "bierstadt-and-blue-sky-sawtooth-traverse"
 date: "2025-07-23"
-description: "This class 3 traverse connects mount Bierstadt and Blue Sky"
 tags: ['14er','mountaineering']
 image: /images/mountaineering/bierstadt-and-blue-sky-sawtooth-traverse/sawtooth-traverse-cover-photo.jpg
 ---

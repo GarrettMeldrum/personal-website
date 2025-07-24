@@ -18,11 +18,10 @@ export function getAllPosts(): Post[] {
   const posts = filenames.map((filename) => {
     const filePath = path.join(postsDirectory, filename);
     const fileContents = fs.readFileSync(filePath, 'utf8');
-    const { data, content } = matter(fileContents);
+    const { data } = matter(fileContents);
 
     return {
-      ...(data as Omit<Post, 'content'>),
-      content,
+      ...(data as Post),
       slug: data.slug,
       image: typeof data.image === 'string' && data.image.trim() !== ''
         ? data.image
@@ -38,13 +37,12 @@ export function getAllPosts(): Post[] {
 }
 
 export function getPostBySlug(slug: string): Post {
-  const filePath = path.join(postsDirectory, `${slug}.md`)
-  const fileContents = fs.readFileSync(filePath, 'utf8')
-  const { data, content } = matter(fileContents)
+  const filePath = path.join(postsDirectory, `${slug}.md`);
+  const fileContents = fs.readFileSync(filePath, 'utf8');
+  const { data } = matter(fileContents);
 
   return {
-    ...(data as Omit<Post, 'content'>),
-    content,
+    ...(data as Post),
     slug,
     image: typeof data.image === 'string' && data.image.trim() !== ''
       ? data.image : '/images/mountaineering/default.jpg',
