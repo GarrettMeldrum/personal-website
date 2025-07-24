@@ -6,8 +6,9 @@ import type { Metadata, ResolvingMetadata } from 'next'
 
 type PageProps = {
   params: {
-    slug: string
-  }
+    promise: Promise<any>;
+    slug: string;
+  };
 }
 
 // Blog post page component
