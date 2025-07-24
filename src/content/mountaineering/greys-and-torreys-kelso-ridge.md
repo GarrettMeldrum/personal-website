@@ -8,12 +8,14 @@ image: "/images/mountaineering/greys-and-torreys-kelso-ridge/kelso-ridge-from-st
 ---
 ##  **Route Breakdown**
 [14ers.com](https://www.14ers.com/route.php?route=torr4)  |  [AllTrails](https://www.14ers.com/route.php?route=torr4)  |  [Virtual Sherpa](https://www.14ers.com/route.php?route=torr4)
+<br></br>
 
 ### Total Distance: 7.41 miles  |  Total Elevation: 3,599 feet  |  Total Time: 6hrs 4m  
-
 <br></br>
 
 ## **View of the kelso ridge from the standard route up Greys**
+<br></br>
+
 ![Looking at the Kelso ridge]( /images/mountaineering/greys-and-torreys-kelso-ridge/kelso-ridge-from-standard-route-going-down-greys.jpg )
 <br></br>
 
