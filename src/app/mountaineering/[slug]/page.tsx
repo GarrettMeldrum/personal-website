@@ -4,14 +4,14 @@ import { marked } from 'marked'
 import type { Metadata, ResolvingMetadata } from 'next'
 
 type PageProps = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
 // Blog post page component
 export default async function BlogPostPage({ params }: PageProps) {
-  const { slug } = params;
+  const { slug } = await params;
   const post: Post = getPostBySlug(slug);
   if (!post) return notFound()
 
