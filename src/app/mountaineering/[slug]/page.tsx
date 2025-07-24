@@ -1,7 +1,6 @@
 import { getPostBySlug, getAllPosts, type Post } from '@/lib/blog'
 import { notFound } from 'next/navigation'
 import { marked } from 'marked'
-import Image from 'next/image'
 import type { Metadata, ResolvingMetadata } from 'next'
 
 type PageProps = {
@@ -16,7 +15,7 @@ export default async function BlogPostPage({ params }: PageProps) {
   const post: Post = getPostBySlug(slug);
   if (!post) return notFound()
 
-  const html = marked(post.content)
+  const html = marked(post.content);
 
   return (
     <main className="px-6 py-16">
