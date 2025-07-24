@@ -6,15 +6,14 @@ import type { Metadata, ResolvingMetadata } from 'next'
 
 type PageProps = {
   params: {
-    promise: Promise<any>;
     slug: string;
   };
-}
+};
 
 // Blog post page component
 export default async function BlogPostPage({ params }: PageProps) {
-  const { slug } = await params
-  const post: Post = getPostBySlug(slug)
+  const { slug } = params;
+  const post: Post = getPostBySlug(slug);
   if (!post) return notFound()
 
   const html = marked(post.content)
