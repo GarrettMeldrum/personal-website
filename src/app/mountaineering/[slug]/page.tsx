@@ -5,9 +5,9 @@ import Image from 'next/image'
 import type { Metadata, ResolvingMetadata } from 'next'
 
 type PageProps = {
-  params: Promise<{
+  params: {
     slug: string
-  }>
+  }
 }
 
 // Blog post page component
@@ -23,20 +23,6 @@ export default async function BlogPostPage({ params }: PageProps) {
       <article className="prose prose-medium dark:prose-invert mx-auto">
         <h1 className="mb-2">{post.title}</h1>
         <p className="text-sm text-gray-500 dark:text-gray-400">{post.date}</p>
-
-        {post.image && (
-          <div className="my-6">
-            <Image
-              src={post.image}
-              alt={post.title}
-              width={800}
-              height={400}
-              className="rounded-xl w-full object-cover"
-              priority
-            />
-          </div>
-        )}
-
         <div dangerouslySetInnerHTML={{ __html: html }} />
       </article>
     </main>

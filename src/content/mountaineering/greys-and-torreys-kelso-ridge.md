@@ -49,12 +49,19 @@ I was able to make my way through this section and began to approach the crux of
 
 ## **Reaching the knifes edge**
 <br></br>
+![The knifes edge]( /images/mountaineering/greys-and-torreys-kelso-ridge/arriving-to-the-couloir.jpg )
+
+<br></br>
 Famously, Kelso Ridge features an awesome and exposed knifes edge. This was my first knifes edge and I was all smiles as I took in the crux then eventually slowly manuveuring my way across. 
 I spent more time on this section becuase of how great the exposure and moves felt on this part. I was having a blast!
 <br></br> 
 
 ## **Reaching the final couliour**
 <br></br>
+
+![Looking up the couliour]( /images/mountaineering/greys-and-torreys-kelso-ridge/looking-up-the-couloir.jpg )
+<br></br>
+
 Once you are off the knifes edge, there is the final approach to the summit. In summer conditions, there is a marked trail up to the summit. When I was there, the approach was completely covered in snow. 
 I was not necessarily prepared for this type of approach, but I made the best of it and it ended up being okay. I put on microspikes and pulled out the trekking poles for more stability climbing up. 
 Slowly, the approach was behind me and I had made it to the top of Torreys Peak!
@@ -62,22 +69,23 @@ Slowly, the approach was behind me and I had made it to the top of Torreys Peak!
 
 ## **Top of Torreys Peak**
 <br></br>
+
 Torreys Peak stands at 14,272ft at the time of writing this and I had made it to the top and silently celebrated my first class 3 route!
 <br></br>
 
 ## **Walking over to Greys Peak**
 <br></br>
+
+![Image of mountain goats]( /images/mountaineering/greys-and-torreys-kelso-ridge/mountain-goat.jpg )
+<br></br>
+
 From here on out, I took the standard route over to Greys Peak and eventually off the mountain. This was also the first point I had ran into any other people! 
 <br></br>
-
-![Image of mountain goats]( )
-<br></br>
-
----
 
 ## **Ascending Greys Peak**
 <br></br>
 At this point in the hike, I was beginning to feel it and was ready to get Greys bagged and head down the mountain. Especially because of the amont of people that were on the standard route on this day.
+<br></br>
 I reached the top of Greys Peak which stands at 14,275ft at the time of writing this and spent significantly less time on this summit compared to Torreys. The amount of 14ers you can see from the top of these two peaks is incredible. I used the app PeakVisor to identify them all around me and was blown away. 
 <br></br>
 

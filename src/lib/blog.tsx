@@ -33,7 +33,7 @@ export function getAllPosts(): Post[] {
   return posts.sort((a, b) => {
     const dateA = new Date(a.date);
     const dateB = new Date(b.date);
-    return dateB.getTime() - dateA.getTime(); // newest first
+    return dateB.getTime() - dateA.getTime();
   });
 }
 

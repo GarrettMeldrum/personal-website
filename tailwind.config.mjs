@@ -2,7 +2,7 @@ import typography from '@tailwindcss/typography'
 
 /** @type {import('tailwindcss').Config} */
 const config = {
-  content: ['./src/**/*.{ts,tsx,md,mdx}'],
+  content: ['./src/**/*.{js,ts,tsx,md,mdx}'],
   theme: {
     extend: {
       typography: {
@@ -23,7 +23,7 @@ const config = {
             },
             h2: {
               fontWeight: '700',
-              fontSize: '1.5rem',
+              fontSize: '2.25rem',
               lineHeight: '1.4',
             },
             h3: {
