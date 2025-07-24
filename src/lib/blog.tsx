@@ -15,8 +15,7 @@ const postsDirectory = path.join(process.cwd(), 'src/content/mountaineering')
 export function getAllPosts(): Post[] {
   const filenames = fs.readdirSync(postsDirectory);
 
-  return filenames.map((filename) => {
-
+  const posts = filenames.map((filename) => {
     const filePath = path.join(postsDirectory, filename);
     const fileContents = fs.readFileSync(filePath, 'utf8');
     const { data, content } = matter(fileContents);
@@ -26,8 +25,15 @@ export function getAllPosts(): Post[] {
       content,
       slug: data.slug,
       image: typeof data.image === 'string' && data.image.trim() !== ''
-        ? data.image : '/images/mountaineering/default.jpg',
+        ? data.image
+        : '/images/mountaineering/default.jpg',
     } as Post;
+  });
+
+  return posts.sort((a, b) => {
+    const dateA = new Date(a.date);
+    const dateB = new Date(b.date);
+    return dateB.getTime() - dateA.getTime(); // newest first
   });
 }
 
