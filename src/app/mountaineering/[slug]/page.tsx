@@ -19,6 +19,9 @@ export default async function BlogPostPage({ params }: PageProps) {
       <article className="prose prose-medium dark:prose-invert mx-auto">
         <h1 className="mb-2">{post.title}</h1>
         <p className="text-sm text-gray-500 dark:text-gray-400">{post.date}</p>
+        {post.content && (
+          <div dangerouslySetInnerHTML={{ __html: post.content }} />
+        )}
       </article>
     </main>
   )

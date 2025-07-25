@@ -2,12 +2,14 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
+import { marked } from 'marked'
 
 export interface Post {
   title: string;
   slug: string; // generates the directory dynamically on build
   date: string;
   image?: string;
+  content?: string;
 }
 
 const postsDirectory = path.join(process.cwd(), 'src/content/mountaineering')
@@ -39,12 +41,13 @@ export function getAllPosts(): Post[] {
 export function getPostBySlug(slug: string): Post {
   const filePath = path.join(postsDirectory, `${slug}.md`);
   const fileContents = fs.readFileSync(filePath, 'utf8');
-  const { data } = matter(fileContents);
+  const { data, content } = matter(fileContents);
 
   return {
     ...(data as Post),
     slug,
     image: typeof data.image === 'string' && data.image.trim() !== ''
       ? data.image : '/images/mountaineering/default.jpg',
+    content: marked.parse(content)
   } as Post;
 }
