@@ -13,7 +13,7 @@ image: /images/mountaineering/bierstadt-and-blue-sky-sawtooth-traverse/sawtooth-
 This was my second class 3 route and I was really enjoyed this route. I arrived to the Bierstadt trail head around 4:10am and was on the trail by 4:15am. The hike up to Bierstadt was quite enjoyable but also bland. I quickly hurried to the summit so that I could be on the Sawtooth by sunrise. 
 <br></br>
 
-## **Top of Mount Bierstadt and Beginning the descent to Sawtooth**
+<h2><b>Top of Mount Bierstadt and Beginning the descent to Sawtooth<b></h2>
 <br></br>
 
 ![Looking up at Mount Bierstadt]( /images/mountaineering/bierstadt-and-blue-sky-sawtooth-traverse/last-push-up-bierstadt.jpg )
@@ -80,3 +80,48 @@ The couple of miles towards the summit have you following the side of the ridge 
 <br></br>
 
 ![Top of Mount Blue Sky]( /images/mountaineering/bierstadt-and-blue-sky-sawtooth-traverse/on-top-of-blue-sky.jpg )
+<br></br>
+
+I had the summit to myself and decided to take the time to eat some fruit snacks and an airhead before heading back. I met this older gentlemen near the top and chatted with him about the route and Colorado! After about 20 minutes or so I began back on the same route that I had came up.
+<br></br>
+
+![Mountain goats]( /images/mountaineering/bierstadt-and-blue-sky-sawtooth-traverse/ )
+
+![The valley up top]
+
+![Looking down the valley and mountains in the background]
+
+Once you make it back around the west ridge approach where you came from the Sawtooth traverse, you will start to aim right towards Mount Spaulding and then down the valley into the gulley that will lead you into the infamous Willows. Although I was dreading the descent, I found myself in absolute awe at the valley that I was descending, it looked like something out of the Sound of Music!
+<br></br>
+
+I decided to take a quick break and take it all in. Quickly, I realized there was a pack of mountian goats off to my left side. Seriously, one of the cooler moments I have been able to enjoy while out in the mountains. 
+<br></br>
+
+![View of the gully]( /images/mountaineering/bierstadt-and-blue-sky-sawtooth-traverse/looking-down-the-gully.jpg )
+<br></br>
+
+![In the middle of the gully]
+<br></br>
+
+Once you reach the gully, the real down climb begins. This section is very steep and filled with loose rock and gravel, I highly recommend allocating plenty of time for this section. I ended up using a lot more time here than anticipated because I was trying to preserve my knees on each step. This, for me, was the most energy taxing part of the whole route.
+<br></br>
+
+## **The willows and finishing the route**
+<br></br>
+
+![Start of the willows]
+<br></br>
+
+![Middle of the willows]( /images/mountaineering/bierstadt-and-blue-sky-sawtooth-traverse/middle-of-the-willows.jpg )
+<br></br>
+
+![Waterfall below the Sawtooth traverse]( /images/mountaineering/bierstadt-and-blue-sky-sawtooth-traverse/waterfall-below-the-traverse.jpg )
+<br></br>
+
+I had finally reached the infamous willows... This was a few miles of trekking through mud with knee deep holes waiting to take your leg. To be quite honest, I did not think this part was as bad as everyone makes it out to be. It was slow going, and I did step into some deep holes that left me covered in mud. I opted to wait to address any mud knowing there was a stream at the start of the trail. After slow going trekking through the willows, I made it back to the standard trail and had just a mile or so left to the car.
+<br></br>
+
+## **Conclusion**
+<br></br>
+
+When reviewing this route, I was quite scared that the moves would be too far out of my comfort zone, I was completely wrong. This class 3 route is super well marked and most rocks are pretty solid. I recommend arriving for parking between 4:00am - 4:30am, I think I was the third person on the sawtooth when starting at this time in the middle of the week. Additionally, I recommend having done a class 3 before attempting this, it requires downclimbing on steep terrain and several exposed moves. I would definetley do this route again, even with the willows at the end!
