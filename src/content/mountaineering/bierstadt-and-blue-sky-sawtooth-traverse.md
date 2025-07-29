@@ -83,11 +83,13 @@ The couple of miles towards the summit have you following the side of the ridge 
 <br></br>
 
 ![View of the west ridge from Blue Sky summit]( /images/mountaineering/bierstadt-and-blue-sky-sawtooth-traverse/looking-at-west-ridge-from-blue-sky.jpg )
+<br></br>
 
 I had the summit to myself and decided to take the time to eat some fruit snacks and an airhead before heading back. I met this older gentlemen near the top and chatted with him about the route and Colorado! After about 20 minutes or so I began back on the same route that I had came up.
 <br></br>
 
 <h2><b>Mountain Goats and the descent</b></h2>
+<br></br>
 
 ![View of Sawtooth from west ridge]( /images/mountaineering/bierstadt-and-blue-sky-sawtooth-traverse/sawtooth-from-west-ridge.jpg )
 <br></br>

@@ -5,14 +5,16 @@ date: "2025-06-25"
 tags: ['14er','mountaineering']
 image: "/images/mountaineering/greys-and-torreys-kelso-ridge/kelso-ridge-from-standard-route-going-down-greys.jpg"
 ---
-##  **Route Breakdown**
+<h2><b>Route Breakdown</b></h2>
+<br></br>
+
 [14ers.com](https://www.14ers.com/route.php?route=torr4)  |  [AllTrails](https://www.14ers.com/route.php?route=torr4)  |  [Virtual Sherpa](https://www.14ers.com/route.php?route=torr4)
 <br></br>
 
-### Total Distance: 7.41 miles  |  Total Elevation: 3,599 feet  |  Total Time: 6hrs 4m  
+<h2><b> Total Distance: 7.41 miles  |  Total Elevation: 3,599 feet  |  Total Time: 6hrs 4m  </b></h2>
 <br></br>
 
-## **View of the kelso ridge from the standard route up Greys**
+<h2><b>View of the kelso ridge from the standard route up Greys</b></h2>
 <br></br>
 
 ![Looking at the Kelso ridge]( /images/mountaineering/greys-and-torreys-kelso-ridge/kelso-ridge-from-standard-route-going-down-greys.jpg )
@@ -38,21 +40,23 @@ Once you reach the saddle of the ridge, you are greeted with an abandoned mine o
 
 ## **On the Saddle and onward**
 <br></br>
+
 The ridge ascent is a little over 1 mile long and for the first half, it was largely class 2 moves with occasional class 3 action. I was feeling really good and making excellent time on this part. 
 Because it was early season, snow patches blocked a lot of the easier off ridge part of the routes. So I was forced to take the ridge direct appraoch on most moves, this led me to taking on some class 4 moves that otherwise, would not have been necessary. 
 <br></br>
 
 ## **reaching the white rock**
 <br></br>
-Once I reached the white rocks, the route became much more technical to the summit. Keeping ridge direct from here on out, I had some awesome exposure and took more time to complete this section.
-I was able to make my way through this section and began to approach the crux of the route
+
+Once I reached the white rocks, the route became much more technical to the summit. Keeping ridge direct from here on out, I had some awesome exposure and took more time to complete this section. I was able to make my way through this section and began to approach the crux of the route
 <br></br> 
 
 ## **Reaching the knifes edge**
 <br></br>
-![The knifes edge]( /images/mountaineering/greys-and-torreys-kelso-ridge/arriving-to-the-couloir.jpg )
 
+![The knifes edge]( /images/mountaineering/greys-and-torreys-kelso-ridge/arriving-to-the-couloir.jpg )
 <br></br>
+
 Famously, Kelso Ridge features an awesome and exposed knifes edge. This was my first knifes edge and I was all smiles as I took in the crux then eventually slowly manuveuring my way across. 
 I spent more time on this section becuase of how great the exposure and moves felt on this part. I was having a blast!
 <br></br> 
@@ -85,18 +89,22 @@ From here on out, I took the standard route over to Greys Peak and eventually of
 
 ## **Ascending Greys Peak**
 <br></br>
+
 At this point in the hike, I was beginning to feel it and was ready to get Greys bagged and head down the mountain. Especially because of the amont of people that were on the standard route on this day.
 <br></br>
+
 I reached the top of Greys Peak which stands at 14,275ft at the time of writing this and spent significantly less time on this summit compared to Torreys. The amount of 14ers you can see from the top of these two peaks is incredible. I used the app PeakVisor to identify them all around me and was blown away. 
 <br></br>
 
 ## **Descending the standard route**
 <br></br>
+
 About half way down Greys Peak I began to feel the exhaustion immensly. There is nothing difficult about the decsent on the standard route that is difficult, I was just tired from the two peaks. Eventually, I made it back down to the normal hiking trail and trekked back to the trailhead. Once I made it back to my car, I fired up the jetboil and ate an MRE and enjoyed the view!
 <br></br>
 
-## **Thoughts and Conclusion**
+<h2><b>Thoughts and Conclusion</h2></b>
 <br></br>
+
 The kelso ridge is absolulety worth anyones time looking to get into mountaineering or more difficult 14ers. There are so many resources online to keep you on route and give you enough confidence to take this on. I had watched and read Virtual Sherpa's guide and read the route description provided by 14ers.com. Highly recommend this route to anyone looking for a challenge!
 <br></br>
 
