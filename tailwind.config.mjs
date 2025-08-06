@@ -8,7 +8,7 @@ const config = {
       typography: {
         medium: {
           css: {
-            color: '#242424',
+	    '--tw-prose-body': '#242424',
             maxWidth: '680px',
             a: {
               color: '#1a8917',
