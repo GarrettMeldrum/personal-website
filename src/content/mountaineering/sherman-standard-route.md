@@ -34,4 +34,8 @@ Once on the saddle, the western slope trail, from Leadville, meets the standard 
 
 <h2><b>Riding the ridgeline and summiting Mount Sherman</b></h2>
 
-The ridgeline will 
+The ridgeline will take you to a false summit initially, then you walk over to the real summit. The ridge was the best part for me, gaining some exposure and more technical terrain for the final stint made the route exciting. The summit, of course, was filled with people. It wasn't hard to find a spot to ourselves where we hung out and refueled before heading down.
+
+<h2><b>Descent</b></h2>
+
+<h2><b>Conclusion and thoughts </b></h2>
