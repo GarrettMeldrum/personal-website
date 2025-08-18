@@ -1,6 +1,6 @@
-import { getPostBySlug, getAllPosts, type Post } from '@/lib/blog'
-import { notFound } from 'next/navigation'
-import type { Metadata, ResolvingMetadata } from 'next'
+import { getPostBySlug, getAllPosts, type Post } from '@/lib/blog';
+import { notFound } from 'next/navigation';
+import type { Metadata, ResolvingMetadata } from 'next';
 
 type PageProps = {
   params: Promise<{
@@ -15,14 +15,19 @@ export default async function BlogPostPage({ params }: PageProps) {
   if (!post) return notFound()
 
   return (
-    <main className="px-6 py-16">
-      <article className="prose prose-medium dark:prose-invert mx-auto">
-        <h1 className="mb-2">{post.title}</h1>
-        <p className="text-sm text-gray-500 dark:text-gray-400">{post.date}</p>
-        {post.content && (
-          <div dangerouslySetInnerHTML={{ __html: post.content }} />
-        )}
-      </article>
+    <main>
+      <div className="max-w-4xl mx-auto bg-gradient-to-b from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl shadow p-8">
+        <header className="pb-6 mb-8 border-b">
+          <h1 className="pb-2 text-4xl font-bold">{post.title}</h1>
+          <p className="text-2xl italic">{post.date}</p>
+        </header>
+        
+        <article className="prose dark:prose-invert">
+          {post.content && (
+            <div dangerouslySetInnerHTML={{ __html: post.content }} />
+          )}
+        </article>
+      </div>
     </main>
   )
 }

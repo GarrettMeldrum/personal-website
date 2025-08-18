@@ -15,7 +15,6 @@ image: "/images/mountaineering/greys-and-torreys-kelso-ridge/kelso-ridge-from-st
 <br></br>
 
 <h2><b>View of the kelso ridge from the standard route up Greys</b></h2>
-<br></br>
 
 ![Looking at the Kelso ridge]( /images/mountaineering/greys-and-torreys-kelso-ridge/kelso-ridge-from-standard-route-going-down-greys.jpg )
 <br></br>
