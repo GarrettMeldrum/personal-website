@@ -14,71 +14,80 @@ image: "/images/mountaineering/greys-and-torreys-kelso-ridge/kelso-ridge-from-st
 <h2><b> Total Distance: 7.41 miles  |  Total Elevation: 3,599 feet  |  Total Time: 6hrs 4m  </b></h2>
 <br></br>
 
-<h2><b>View of the kelso ridge from the standard route up Greys</b></h2>
+<h2><b>The Kelso Ridge Route</b></h2>
 
 ![Looking at the Kelso ridge]( /images/mountaineering/greys-and-torreys-kelso-ridge/kelso-ridge-from-standard-route-going-down-greys.jpg )
 <br></br>
 
-This was my first class three hike and I intentially chose the Kelso Ridge as it is often called the "easiest class 3 14er" in the state. So, this sounded like a perfect start to my 2025 mountaineering season.
-I checked on 14ers.com to see if anyone else had done the route this early in the season and luckily there was a trail report a week before I had went stating the route is 80-90% summer conditions.
+![Gear for the hike]( /images/mountaineering/greys-and-torreys-kelso-ridge/gear.jpeg )
 <br></br>
 
-I left my house at 3:00AM to get to the trailhead. After exiting I-70, you are immediately greated with a pretty rough offroad trail that lasts about ~3.5 miles. I would recommend a 4WD vehicle or at minimum, large clearance vehicle.
-I arrived to the trailhead and was one of the first up that morning followed by a convoy of other hikers that flowed in after me. There were several car campers at the trailhead as well. 
+The Kelso Ridge was my first class three route. I had intentially went with the Kelso Ridge because several forums say it is one of the easiest class three routes up a fourteener. I had reviewed several route reviews to get a good understanding of what I would be up against. I had read a report from the week prior of the route saying it was roughly 80-90% summer conditions. With that information, I set the date and left early in the morning to ensure I would get a parking spot at the upper trailhead.
 <br></br>
 
-![Gear for the hike]( /images/mountaineering/greys-and-torreys-kelso-ridge/gear.jpg )
+Exiting I-70, you're immedietaly greated with the lowertrail head and the offroad drive up to the uppertrail head. This road is pretty terrible, several parts that bottom out completely and is notorious for puncturing fuel tanks on vehicles. I would highly recommend having a 4WD vehicle or something with great clearance. Eagerly, I arrived at the uppertrail head around 4:15am, I was followed by a convoy of other vehicles looking to get a good spot and an early start. There were several individuals car camping in the uppertrail head which I am sure I gave them an unwanted early wake up with my 400 lumen headlamp.
 <br></br>
 
-I geared up and started on the trail at around 4:30AM on the standard route. After a few miles, I made it to the fork that sends you on your way to the Kelso Ridge.
-Once you reach the saddle of the ridge, you are greeted with an abandoned mine on your right. Once you are on the saddle, it will be a class 2 or higher hike.
+I geared up and started on the standard route around 4:30am. The first bit of the standard route sends you through a valley that eventually gets you to the base of Grays and Torreys. There will be a very clear fork in the standard route, this divergance marks the start of the Kelso Ridge route. 
 <br></br>
 
-![Sitting on the saddle looking up the ridge]( /images/mountaineering/greys-and-torreys-kelso-ridge/looking-up-at-the-ridge.jpg )
+<h2><b>Arriving to the saddle and beginning the ridge</b></h2>
+
+![On the saddle looking up the ridge]( /images/mountaineering/greys-and-torreys-kelso-ridge/start-of-ridge.jpeg )
 <br></br>
 
-## **On the Saddle and onward**
+![slightly up the saddle looking up the ridge]( /images/mountaineering/greys-and-torreys-kelso-ridge/looking-up-the-saddle.jpeg )
 <br></br>
 
-The ridge ascent is a little over 1 mile long and for the first half, it was largely class 2 moves with occasional class 3 action. I was feeling really good and making excellent time on this part. 
-Because it was early season, snow patches blocked a lot of the easier off ridge part of the routes. So I was forced to take the ridge direct appraoch on most moves, this led me to taking on some class 4 moves that otherwise, would not have been necessary. 
+![Looking down the ridge]( /images/mountaineering/greys-and-torreys-kelso-ridge/looking-down-the-ridge.jpeg )
 <br></br>
 
-## **reaching the white rock**
+Upon reaching the saddle, the route is going to be class 2 and 3 from here on out. I took a break to helmet up and strap up my trekking poles and was on my way. The first part of the ridge is well marked with a pretty visible trail that you will follow until pretty much reaching the white rock, which is about halfway up the ridge. To my suprise, I didn't see anyone above me or below me, I was going to have the whole ridge to myself!
 <br></br>
 
-Once I reached the white rocks, the route became much more technical to the summit. Keeping ridge direct from here on out, I had some awesome exposure and took more time to complete this section. I was able to make my way through this section and began to approach the crux of the route
-<br></br> 
-
-## **Reaching the knifes edge**
+I was pretty stoked to be up there, so I was moving quickly as the terrain to begin was a lot of class 2 with occasional class 3 moves. Because it was early season, the snow patches dictated my approach and I ended up staying mostly ridge direct to avoid dealing with too much exposed snow patches.
 <br></br>
+
+<h2><b>Reaching the white rock and beginning harder terrain</b></h2>
+
+
+![Facing the rest of the ridge]( /images/mountaineering/greys-and-torreys-kelso-ridge/harder-terrain-ahead.jpeg )
+<br></br>
+
+![View of mountains in the distance]( /images/mountaineering/greys-and-torreys-kelso-ridge/mountains-in-distance.jpeg )
+<br></br>
+
+About halfway up the ridge, the route becomes a lot more technical to the summit. At this point, I spent more time planning my route up each section of the ridge. As I mentioned previously, I wanted to stay ridge direct, this ended up making the route slightly more difficult at times. I was thinking it would serve as good training to try to stay direct as much as possible. 
+<br></br>
+
+Taking your time and making strong secure moves is important at this point, this section of the route is slow going and requires you to be strategic. The next section of the route is going to be the knifes edge, the crux of the route. 
+<br></br>
+
+<h2><b>Approaching the knifes edge</b></h2>
 
 ![The knifes edge]( /images/mountaineering/greys-and-torreys-kelso-ridge/arriving-to-the-couloir.jpg )
 <br></br>
 
-Famously, Kelso Ridge features an awesome and exposed knifes edge. This was my first knifes edge and I was all smiles as I took in the crux then eventually slowly manuveuring my way across. 
-I spent more time on this section becuase of how great the exposure and moves felt on this part. I was having a blast!
-<br></br> 
-
-## **Reaching the final couliour**
+Famously, the knifes edge on Kelso Ridge offers a good deal of exposure and an introduction to knife edges on ridgelines. This was my first time taking one of these on and it was all smiles as I approach the crux, I was so excited. Because of the time of year, the snow lessened the exposure and even made it possible to take it from the snow patch if you prefered. 
 <br></br>
+
+I ended up taking a break in the middle for some fruit snacks and enjoyed the exposure. To say I was having a blast would be an understatement.
+<br></br>
+
+<h2><b>Reaching the finishing couliour</b></h2>
 
 ![Looking up the couliour]( /images/mountaineering/greys-and-torreys-kelso-ridge/looking-up-the-couloir.jpg )
 <br></br>
 
-Once you are off the knifes edge, there is the final approach to the summit. In summer conditions, there is a marked trail up to the summit. When I was there, the approach was completely covered in snow. 
-I was not necessarily prepared for this type of approach, but I made the best of it and it ended up being okay. I put on microspikes and pulled out the trekking poles for more stability climbing up. 
-Slowly, the approach was behind me and I had made it to the top of Torreys Peak!
+Once you are off the knifes edge, there is the final approach to the summit. In summer conditions, there is a marked trail up to the summit. When I was there, the approach was completely covered in snow. I was not necessarily prepared for this type of approach, but I made the best of it and it ended up being okay. I put on microspikes and pulled out the trekking poles for more stability climbing up. Slowly, the approach was behind me and I had made it to the top of Torreys Peak!
 <br></br>
 
-## **Top of Torreys Peak**
-<br></br>
+<h2><b>Top of Torreys Peak</b></h2>
 
 Torreys Peak stands at 14,272ft at the time of writing this and I had made it to the top and silently celebrated my first class 3 route!
 <br></br>
 
-## **Walking over to Greys Peak**
-<br></br>
+<h2><b>Walking over to Greys Peak</b></h2>
 
 ![Image of mountain goats]( /images/mountaineering/greys-and-torreys-kelso-ridge/mountain-goat.jpg )
 <br></br>
