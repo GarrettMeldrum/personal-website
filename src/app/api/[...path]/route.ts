@@ -12,9 +12,12 @@ function headersFrom(req: Request) {
   return headers;
 }
 
-export async function GET(req: Request, { params }: { params: { path?: string[] } }) {
+export async function GET(
+  req: Request,
+  { params }: { params: { path: string[] } }
+) {
   const url = new URL(req.url);
-  const path = (params.path || []).join("/");
+  const path = params.path.join("/");
   const upstream = await fetch(
     `https://api.garrettmeldrum.com/v1/${path}${url.search}`,
     {

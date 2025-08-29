@@ -23,7 +23,7 @@ export default function Page() {
       <h1>Garrett Meldrum</h1>
       <h3>This is a collection of my personal projects, hobbies, and life updates!</h3>
       <LiveUpdates onUpdate={refresh} />
-      <LiveUpdates tracks={tracks} />
+      <Dashboard tracks={tracks} />
     </div>
   );
 }
