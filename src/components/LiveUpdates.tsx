@@ -1,112 +1,30 @@
-// components/LiveUpdates.tsx
 "use client";
 
-import { useEffect, useRef } from "react";
-
-type Update = unknown; // change to your data shape
+import { useEffect } from "react";
 
 export default function LiveUpdates({
   onUpdate,
-  coalesceMs = 100,           // batch updates a bit
-  closeWhenHidden = false,      // set false if you want "always live"
 }: {
-  onUpdate: (data: Update) => void;
-  coalesceMs?: number;
-  closeWhenHidden?: boolean;
+  onUpdate: (data: unknown) => void;
 }) {
-  const esRef = useRef<EventSource | null>(null);
-  const handlerRef = useRef(onUpdate);
-  const timerRef = useRef<number | null>(null);
-  const queueRef = useRef<Update[]>([]);
-
   useEffect(() => {
-    handlerRef.current = onUpdate;
-  }, [onUpdate]);
+    const es = new EventSource("/api/stream");
 
-  function flush() {
-    const q = queueRef.current;
-    queueRef.current = [];
-    if (q.length) {
-      // deliver individually (or change to a single batched callback)
-      for (const item of q) handlerRef.current(item);
-    }
-  }
-
-  function scheduleFlush() {
-    if (timerRef.current != null) return;
-    timerRef.current = window.setTimeout(() => {
-      timerRef.current = null;
-      flush();
-    }, coalesceMs);
-  }
-
-  function open() {
-    if (esRef.current) return;
-    const es = new EventSource("/api/stream"); // same-origin proxy
-
-    es.onopen = () => {
-      // connection established
-    };
-
-    es.addEventListener("update", (ev) => {
+    const handler = (ev: MessageEvent) => {
       try {
-        const data = JSON.parse((ev as MessageEvent).data);
-        queueRef.current.push(data);
-        scheduleFlush();
-      } catch (e) {
-        // swallow bad frames
-      }
-    });
-
-    es.addEventListener("ping", () => {
-      // keepalive from server; nothing to do
-    });
-
-    es.onerror = () => {
-      // EventSource auto-retries. If it fully closes, clear our ref so we can reopen.
-      if (es.readyState === EventSource.CLOSED) {
-        esRef.current = null;
-        // a tiny backoff to avoid hot-looping if upstream is hard-down
-        setTimeout(open, 1000);
+        onUpdate(JSON.parse(ev.data));
+      } catch {
+        // swallow JSON parse errors
       }
     };
 
-    esRef.current = es;
-  }
-
-  function close() {
-    esRef.current?.close();
-    esRef.current = null;
-    if (timerRef.current != null) {
-      clearTimeout(timerRef.current);
-      timerRef.current = null;
-    }
-    queueRef.current = [];
-  }
-
-  useEffect(() => {
-    open();
-
-    const onVis = () => {
-      if (!closeWhenHidden) return;
-      if (document.visibilityState === "visible") open();
-      else close();
-    };
-    if (closeWhenHidden) {
-      document.addEventListener("visibilitychange", onVis);
-    }
-
-    const onBeforeUnload = () => close();
-    window.addEventListener("beforeunload", onBeforeUnload);
+    es.addEventListener("update", handler);
 
     return () => {
-      if (closeWhenHidden) {
-        document.removeEventListener("visibilitychange", onVis);
-      }
-      window.removeEventListener("beforeunload", onBeforeUnload);
-      close();
+      es.removeEventListener("update", handler);
+      es.close();
     };
-  }, [closeWhenHidden, coalesceMs]);
+  }, [onUpdate]);
 
   return null;
 }

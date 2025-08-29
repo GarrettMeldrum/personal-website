@@ -1,9 +1,10 @@
 "use client";
 import { useState, useRef } from "react";
 import LiveUpdates from "../components/LiveUpdates";
+import Dashboard from "../components/Dashboard";
 
 export default function Page() {
-  const [tracks, setTracks] = useState<Track[]>([]);
+  const [tracks, setTracks] = useState<unkown[]>([]);
   const fetchingRef = useRef(false);
 
   async function refresh() {
@@ -22,7 +23,7 @@ export default function Page() {
       <h1>Garrett Meldrum</h1>
       <h3>This is a collection of my personal projects, hobbies, and life updates!</h3>
       <LiveUpdates onUpdate={refresh} />
-      <Dashboard tracks={tracks} />
+      <LiveUpdates tracks={tracks} />
     </div>
   );
 }
