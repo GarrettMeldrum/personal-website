@@ -1,8 +1,10 @@
+/** @type {import('next').NextConfig} */
 
 const nextConfig = {
   async rewrites() {
     return [
-      { source: "/api/:path*", destination: "http://127.0.0.1:8000/:path*" },
+      { source: "/api/:path*", 
+        destination: "https://api.garrettmeldrum.com/:path*" },
     ];
   },
 };

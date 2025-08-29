@@ -7,8 +7,8 @@ export async function GET() {
   const upstream = await fetch('https://api.garrettmeldrum.com/v1/stream', {
     headers: { 
 		Accept: 'text/event-stream',
-		CF-Access-Client-Id: process.env.CF_ACCESS_CLIENT_ID!,
-		CF-Access-Client-Secret: process.env.CF_ACCESS_CLIENT_SECRET!,
+		'CF-Access-Client-Id': process.env.CF_ACCESS_CLIENT_ID!,
+		'CF-Access-Client-Secret': process.env.CF_ACCESS_CLIENT_SECRET!,
 		 },
     cache: 'no-store',
   })
@@ -18,8 +18,8 @@ export async function GET() {
   }
 
 
-  const { readable, writeable } = new TranformStream();
-  upstream.body.pipeTo(writeable);
+  const { readable, writable } = new TransformStream();
+  upstream.body.pipeTo(writable);
   
   return new Response(readable, {
     status: 200,

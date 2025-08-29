@@ -8,7 +8,7 @@ type Update = unknown; // change to your data shape
 export default function LiveUpdates({
   onUpdate,
   coalesceMs = 100,           // batch updates a bit
-  closeWhenHidden = true,      // set false if you want "always live"
+  closeWhenHidden = false,      // set false if you want "always live"
 }: {
   onUpdate: (data: Update) => void;
   coalesceMs?: number;

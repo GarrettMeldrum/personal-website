@@ -1,6 +1,5 @@
 "use client";
 import { useState, useRef } from "react";
-import Dashboard, { Track } from "../components/Dashboard";
 import LiveUpdates from "../components/LiveUpdates";
 
 export default function Page() {
@@ -11,7 +10,7 @@ export default function Page() {
     if (fetchingRef.current) return;
     fetchingRef.current = true;
     try {
-      const r = await fetch("/recent", { cache: "no-store" });
+      const r = await fetch("/api/recent", { cache: "no-store" });
       if (r.ok) setTracks(await r.json());
     } finally {
       fetchingRef.current = false;
