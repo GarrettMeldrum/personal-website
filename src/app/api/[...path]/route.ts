@@ -12,12 +12,14 @@ function headersFrom(req: Request) {
   return headers;
 }
 
-export async function GET(
-  req: Request,
-  { params }: { params: { path: string[] } }
-) {
+export async function GET(req: Request, context: unknown) {
   const url = new URL(req.url);
-  const path = params.path.join("/");
+  const { params } = context as { params: Record<string, string | string[]> };
+  const segments = params.path;
+  if (!Array.isArray(segments)) {
+    return new Response("Not Found", { status: 404 });
+  }
+  const path = segments.join("/");
   const upstream = await fetch(
     `https://api.garrettmeldrum.com/v1/${path}${url.search}`,
     {

@@ -4,7 +4,7 @@ import LiveUpdates from "../components/LiveUpdates";
 import Dashboard from "../components/Dashboard";
 
 export default function Page() {
-  const [tracks, setTracks] = useState<unkown[]>([]);
+  const [tracks, setTracks] = useState<Array<unknown>>([]);
   const fetchingRef = useRef(false);
 
   async function refresh() {
