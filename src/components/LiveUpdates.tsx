@@ -13,11 +13,13 @@ export default function LiveUpdates({
     const handler = () => {
 		void onUpdate();
     };
-
-    es.addEventListener("message", handler);
+    
+	es.addEventListener("message", handler);
+    es.addEventListener("update", handler);
 
     return () => {
       es.removeEventListener("message", handler);
+      es.removeEventListener("update", handler);
       es.close();
     };
   }, [onUpdate]);

@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import LiveUpdates from "../components/LiveUpdates";
 import Dashboard from "../components/Dashboard";
 
@@ -7,7 +7,8 @@ export default function Page() {
   const [tracks, setTracks] = useState<Array<unknown>>([]);
   const fetchingRef = useRef(false);
 
-  async function refresh() {
+  
+  const refresh = useCallback(async () => {
     if (fetchingRef.current) return;
     fetchingRef.current = true;
     try {
@@ -16,11 +17,11 @@ export default function Page() {
     } finally {
       fetchingRef.current = false;
     }
-  }
+  }, []);
   
   useEffect(() => {
     refresh();
-  }, []);
+  }, [refresh]);
 
   return (
     <div>
