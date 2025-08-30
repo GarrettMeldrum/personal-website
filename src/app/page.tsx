@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import LiveUpdates from "../components/LiveUpdates";
 import Dashboard from "../components/Dashboard";
 
@@ -11,12 +11,16 @@ export default function Page() {
     if (fetchingRef.current) return;
     fetchingRef.current = true;
     try {
-      const r = await fetch("/api/recent", { cache: "no-store" });
+      const r = await fetch("/api/recent?limit=5", { cache: "no-store" });
       if (r.ok) setTracks(await r.json());
     } finally {
       fetchingRef.current = false;
     }
   }
+  
+  useEffect(() => {
+    refresh();
+  }, []);
 
   return (
     <div>

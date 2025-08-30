@@ -12,7 +12,13 @@ function headersFrom(req: Request) {
   return headers;
 }
 
+
 export async function GET(req: Request, context: unknown) {
+  if (!process.env.CF_ACCESS_CLIENT_ID || !process.env.CF_ACCESS_CLIENT_SECRET) {
+    console.error("Missing CF Access env vars at runtime");
+    return new Response("Server misconfigured: CF Access env missing", { status: 500 });
+  }
+  
   const url = new URL(req.url);
   const { params } = context as { params: Record<string, string | string[]> };
   const segments = params.path;
@@ -21,7 +27,7 @@ export async function GET(req: Request, context: unknown) {
   }
   const path = segments.join("/");
   const upstream = await fetch(
-    `https://api.garrettmeldrum.com/v1/${path}${url.search}`,
+    `https://api.garrettmeldrum.com/${path}${url.search}`,
     {
       headers: headersFrom(req),
       cache: "no-store",
