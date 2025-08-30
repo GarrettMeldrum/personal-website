@@ -18,10 +18,10 @@ export default function LiveUpdates({
       }
     };
 
-    es.addEventListener("update", handler);
+    es.addEventListener("message", handler);
 
     return () => {
-      es.removeEventListener("update", handler);
+      es.removeEventListener("message", handler);
       es.close();
     };
   }, [onUpdate]);
