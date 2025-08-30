@@ -29,9 +29,10 @@ export async function GET(
   if (accept) headers.set("Accept", accept);
 
   const url = new URL(request.url);
-  const upstreamUrl = `${API_BASE}/${path.join("/")}${url.search}`;
+  const upstreamUrl = new URL(path.join("/"), API_BASE);
+  upstreamUrl.search = url.search;
 
-  const upstream = await fetch(upstreamUrl, { headers, cache: "no-store" });
+  const upstream = await fetch(upstreamUrl.toString(), { headers, cache: "no-store" });
 
   return new Response(upstream.body, {
     status: upstream.status,

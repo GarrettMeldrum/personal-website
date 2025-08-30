@@ -5,17 +5,13 @@ import { useEffect } from "react";
 export default function LiveUpdates({
   onUpdate,
 }: {
-  onUpdate: (data: unknown) => void;
+  onUpdate: () => void | Promise<void>;
 }) {
   useEffect(() => {
     const es = new EventSource("/api/stream");
 
-    const handler = (ev: MessageEvent) => {
-      try {
-        onUpdate(JSON.parse(ev.data));
-      } catch {
-        // swallow JSON parse errors
-      }
+    const handler = () => {
+		void onUpdate();
     };
 
     es.addEventListener("message", handler);
