@@ -1,34 +1,23 @@
-"use client";
-import { useState, useRef, useEffect, useCallback } from "react";
-import LiveUpdates from "../components/LiveUpdates";
-import Dashboard from "../components/Dashboard";
+type track = { 
+  track_id: string | number; 
+  track_name: string; 
+  artist_name: string
+};
 
-export default function Page() {
-  const [tracks, setTracks] = useState<Array<unknown>>([]);
-  const fetchingRef = useRef(false);
-
+export default async function Page() {
+  const res = await fetch('${process.env.API_BASE}/api/recent', {
+    cache: 'no-store',
+  });
   
-  const refresh = useCallback(async () => {
-    if (fetchingRef.current) return;
-    fetchingRef.current = true;
-    try {
-      const r = await fetch("/api/recent?limit=5", { cache: "no-store" });
-      if (r.ok) setTracks(await r.json());
-    } finally {
-      fetchingRef.current = false;
-    }
-  }, []);
+  if (!res.ok) throw new Error('Failed to load tracks');
+  const data = (await res.json()) as tracks[];
   
-  useEffect(() => {
-    refresh();
-  }, [refresh]);
-
   return (
-    <div>
-      <h1>Garrett Meldrum</h1>
-      <h3>This is a collection of my personal projects, hobbies, and life updates!</h3>
-      <LiveUpdates onUpdate={refresh} />
-      <Dashboard tracks={tracks} />
-    </div>
-  );
+    <main>
+      <h1><Spotify Recent Listens/h1>
+      <ul>
+        {data.map((u) => <li key={String(t.track_id)}>{t.track_name}</li>)}
+      </ul>
+    </main>
+  )
 }
