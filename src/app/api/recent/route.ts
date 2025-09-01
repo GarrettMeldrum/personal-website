@@ -3,9 +3,11 @@ import { getBasicAuthHeader } from "@/utils/auth";
 
 export async function GET() {
 	try {
-		const response = await fetch(`${process.env.API_BASE}/recent?limit=5`, {
+		const responseUrl = process.env.API_BASE
+		const response = await fetch(`${responseUrl}/recent?limit=5`, {
 			headers: {
 					Authorization: getBasicAuthHeader(),
+					Accept: "application/json",
 				},
 				cache: 'no-store',
 		});
@@ -16,7 +18,7 @@ export async function GET() {
 		
 		
 		const data = await response.json();
-		
+		console.log(data);
 		return NextResponse.json(data, {
 			headers: { "Content-Type": "application/json" },
 		});
