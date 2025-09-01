@@ -1,4 +1,4 @@
-
+import { NextResponse } from "next/server";
 
 
 export async function GET(request: Request) {
@@ -20,7 +20,7 @@ export async function GET(request: Request) {
 	return NextResponse.json(data, {
 		headers: { 'cache-control': 'private, no-store' },
 	});
-} catch (err) {
+	} catch (err) {
 		return NextResponse.json({ error: 'Server error' }, { status: 500 });
 	}
 }
