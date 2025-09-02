@@ -1,31 +1,40 @@
-"use client";
+// app/page.tsx
+'use client'; // Mark as a Client Component
 
-import { useEffect, useRef } from "react";
+import { useState, useEffect } from 'react';
 
-export default function Page() {
-  const preRef = useRef<HTMLPreElement>(null);
+export default function YourPage() {
+  const [data, setData] = useState(null);
 
   useEffect(() => {
-    const run = async () => {
-      const res = await fetch("/api/recent", { cache: "no-cache" });
-      if (!res.body) return;
-
-      const reader = res.body.getReader();
-      const decoder = new TextDecoder();
-
-      while (true) {
-        const { value, done } = await reader.read();
-        if (done) break;
-        preRef.current!.textContent += decoder.decode(value, { stream: true });
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/api/recent', { cache: "no-store" }); // Relative path to your route.ts
+        const result = await response.json();
+        setData(result);
+      } catch (error) {
+        console.error('Error fetching data:', error);
       }
     };
-    run();
-  }, []);
+
+    // Initial fetch
+    fetchData();
+
+    // Set up polling interval (e.g., every 5 seconds)
+    const intervalId = setInterval(fetchData, 5000);
+
+    // Clean up interval on component unmount
+    return () => clearInterval(intervalId);
+  }, []); // Empty dependency array means this runs once on mount
 
   return (
-    <main>
-      <h1>Recent (streamed)</h1>
-      <pre ref={preRef}></pre>
-    </main>
+    <div>
+      <h1>Polling Example</h1>
+      {data ? (
+        <pre>{JSON.stringify(data, null, 2)}</pre>
+      ) : (
+        <p>Loading data...</p>
+      )}
+    </div>
   );
 }
