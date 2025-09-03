@@ -1,6 +1,6 @@
 import { Lora } from 'next/font/google';
 import "./globals.css";
-import NavBar from '@/components/NavBar'
+import NavBar from '@/components/NavBar';
 import React, { type ReactNode } from "react";
 
 const lora = Lora ({

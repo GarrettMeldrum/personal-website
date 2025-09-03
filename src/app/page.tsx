@@ -3,6 +3,8 @@
 
 import { useState, useEffect } from 'react';
 
+
+
 export default function YourPage() {
   const [data, setData] = useState(null);
 
@@ -30,11 +32,16 @@ export default function YourPage() {
   return (
     <div>
       <h1>Spotify Listens</h1>
-      {data ? (
-        <pre>{JSON.stringify(data, null, 2)}</pre>
-      ) : (
-        <p>Loading data...</p>
-      )}
+      {!data ? (<p>Loading data...</p>) :
+        ( 
+        <> 
+        {data[0] && (<p><strong>{data[0].track_name}</strong> — {data[0].artist_name}</p>)}
+        {data[1] && (<p><strong>{data[1].track_name}</strong> — {data[1].artist_name}</p>)}
+        {data[2] && (<p><strong>{data[2].track_name}</strong> — {data[2].artist_name}</p>)}
+        {data[3] && (<p><strong>{data[3].track_name}</strong> — {data[3].artist_name}</p>)}
+        {data[4] && (<p><strong>{data[4].track_name}</strong> — {data[4].artist_name}</p>)}
+        </>
+        )}
     </div>
   );
 }
