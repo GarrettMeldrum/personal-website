@@ -29,7 +29,7 @@ export default function YourPage() {
 
   return (
     <div>
-      <h1>Polling Example</h1>
+      <h1>Spotify Listens</h1>
       {data ? (
         <pre>{JSON.stringify(data, null, 2)}</pre>
       ) : (
