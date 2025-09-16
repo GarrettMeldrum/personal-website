@@ -6,9 +6,10 @@ import clsx from 'clsx'
 
 const links = [
   { href: '/projects', label: 'Projects' },
-  { href: '/life-updates', label: 'Life Updates' },
+  { href: '/life-updates', label: 'Life & Travel' },
   { href: '/mountaineering', label: 'Mountaineering' },  
   { href: '/homebrewing', label: 'Homebrewing' },
+  { href: '/cooking', label: 'Cooking' },
 ]
 
 export default function NavBar() {

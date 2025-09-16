@@ -9,23 +9,27 @@ export default function MountaineeringIndex() {
     <div className="px-6 py-10 space-y-8">
       <h1 className="text-4xl font-bold text-center">Mountaineering Blog Posts</h1>
       {posts.map((post) => (
-        <div key={post.slug} className="border rounded-lg p-4 shadow-md mx-auto max-w-2xl text-center">
-          <Link href={`/mountaineering/${post.slug}`}>
-            <h2 className="text-2xl font-semibold hover:underline">{post.title}</h2>
-          </Link>
-          <p className="text-sm text-gray-500">{post.date}</p>
-          {typeof post.image === 'string' && post.image.trim() !== '' && (
-            <div className="relative w-full max-w-2xl h-96 mt-4 mx-auto">
-              <Image
-                src={post.image}
-                alt={post.title}
-                fill
-                className="object-cover rounded-lg"
-                sizes="(max-width: 768px) 100vw, 600px"
-              />
-            </div>
-          )}
-        </div>
+        <Link 
+          key={post.slug}
+          href={`/mountaineering/${post.slug}`}
+          className='block'
+        >
+          <div className="border rounded-lg p-4 shadow-md mx-auto max-w-2xl text-center">
+            <p className="text-2xl">{post.title}</p>
+            <p className="text-sm text-gray-500">{post.date}</p>
+            {typeof post.image === 'string' && post.image.trim() !== '' && (
+              <div className="relative w-full max-w-2xl h-96 mt-4 mx-auto">
+                <Image
+                  src={post.image}
+                  alt={post.title}
+                  fill
+                  className="object-cover rounded-lg"
+                  sizes="(max-width: 768px) 100vw, 600px"
+                />
+              </div>
+            )}
+          </div>
+        </Link>
       ))}
     </div>
   );
