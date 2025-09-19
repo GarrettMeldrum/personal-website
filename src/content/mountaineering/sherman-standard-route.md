@@ -3,9 +3,9 @@ title: "Mount Sherman via the Standard Route"
 slug: "sherman-standard-route"
 date: "2025-7-13"
 tags: ['14er','mountaineering']
-image:
+image: /images/mountaineering/sherman-standard-route/ridgeline-approach.jpg
 ---
-/images/mountaineering/sherman-standard-route/
+
 <h2><b>Route Overview</b></h2>
 
 ![Image]( /images/mountaineering/sherman-standard-route/ridgeline-approach.jpg )
@@ -41,7 +41,7 @@ The first part of this route follows a gravel road that will take on elevation v
 
 <h2><b>The ridgeline approach</b></h2>
 
-![Images]( /images/mountaineering/sherman-standard-route/on-saddle-to-the-ridgeline.jpg )
+![Images]( /images/mountaineering/sherman-standard-route/on-saddle-to-the-ridge.jpg )
 <br></br>
 
 ![Images]( /images/mountaineering/sherman-standard-route/approach-to-the-ridgeline.jpg )
