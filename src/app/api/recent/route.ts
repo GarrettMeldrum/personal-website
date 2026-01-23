@@ -37,9 +37,10 @@ export async function GET() {
 
 		const data = await response.json();
 
+		// Remove caching for real-time updates
 		return NextResponse.json(data, {
 			headers: {
-				'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=120',
+				'Cache-Control': 'no-store, no-cache, must-revalidate',
 			},
 		});
 	} catch (error) {

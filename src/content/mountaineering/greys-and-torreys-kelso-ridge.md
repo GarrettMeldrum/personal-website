@@ -1,8 +1,11 @@
 ---
 title: "Greys and Torreys via the kelso ridge"
 slug: "greys-and-torreys-kelso-ridge"
+peak: "Greys and Torreys Peak"
+elevation: "14,272"
+route: "Kelso Ridge"
+class: "Class 3"
 date: "2025-06-25"
-tags: ['14er','mountaineering']
 image: "/images/mountaineering/greys-and-torreys-kelso-ridge/kelso-ridge-from-standard-route-going-down-greys.jpg"
 ---
 

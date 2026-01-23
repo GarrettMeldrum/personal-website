@@ -1,8 +1,11 @@
 ---
 title: "Mount Bierstadt and Blue Sky via the Sawtooth Traverse"
 slug: "bierstadt-and-blue-sky-sawtooth-traverse"
+peak: "Mount Bierstadt and Blue Sky"
+elevation: "14,265"
+route: "Sawtooth Traverse"
+class: "Class 3"
 date: "2025-07-23"
-tags: ['14er','mountaineering']
 image: /images/mountaineering/bierstadt-and-blue-sky-sawtooth-traverse/sawtooth-traverse-cover-photo.jpg
 ---
 

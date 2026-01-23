@@ -1,6 +1,10 @@
 ---
 title: "Mount Sherman via the Standard Route"
 slug: "sherman-standard-route"
+peak: "Mount Sherman"
+elevation: "14,043"
+route: "Standard Route"
+class: "Class 1"
 date: "2025-7-13"
 tags: ['14er','mountaineering']
 image: /images/mountaineering/sherman-standard-route/ridgeline-approach.jpg
