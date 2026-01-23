@@ -20,9 +20,8 @@
 }
 
 /* Fix blurry transforms on hover */
-* {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.hover\:scale-\[1\.02\]:hover {
+  transform: scale3d(1.02, 1.02, 1);
 }
 
 a, button, div {
