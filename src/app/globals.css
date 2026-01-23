@@ -19,6 +19,19 @@
   }
 }
 
+/* Fix blurry transforms on hover */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a, button, div {
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
+}
+
 .blog-layout h2 {
   @apply text-3xl font-semibold mb-2 pb-4;
 }
@@ -32,4 +45,3 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-lora), serif;
 }
-

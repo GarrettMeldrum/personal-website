@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { projects } from '@/data/projects';
+import { Code } from 'lucide-react';
 
 type Project = {
   title: string
@@ -11,60 +12,78 @@ type Project = {
 }
 
 export default function ProjectsPage() {
-  // Map the data structure from projects.ts to match your page layout
   const mappedProjects: Project[] = projects.map(p => ({
     title: p.name,
-    description: [p.description], // Convert single description to array
-    github: p.link !== '#' ? p.link : undefined, // Only include if not placeholder
-    tags: p.tech // Use tech stack as tags
+    description: [p.description],
+    github: p.link !== '#' ? p.link : undefined,
+    tags: p.tech
   }));
 
   return (
-    <main className="px-6 py-10 max-w-3xl mx-auto space-y-8">
-      <h1 className="text-3xl font-bold mb-4">Projects</h1>
+    <main className="max-w-4xl mx-auto px-6 py-16">
+      <div className="text-center mb-12">
+        <h1 className="text-5xl font-bold text-white mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
+          Projects
+        </h1>
+        <p className="text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed">
+          A collection of projects I've built, ranging from web applications to data tools.
+        </p>
+      </div>
 
-      {mappedProjects.map((project, index) => (
-        <div
-          key={index}
-          className="p-6 rounded-2xl shadow-md bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800"
-        >
-          {project.github ? (
-            <h2 className="text-xl font-semibold">
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
-              >
-                {project.title}
-              </a>
-            </h2>
+      <div className="space-y-6">
+        {mappedProjects.map((project, index) => {
+          const content = (
+            <>
+              <div className="flex items-center gap-3 mb-3">
+                <Code className="w-6 h-6 text-blue-400" />
+                <h2 className="text-2xl font-semibold text-white group-hover:text-blue-400 transition-colors">
+                  {project.title}
+                </h2>
+              </div>
+
+              {project.description.length > 0 && (
+                <ul className="list-disc list-outside pl-6 text-gray-300 space-y-2 mb-4">
+                  {project.description.map((item, i) => (
+                    <li key={i}>{item}</li>
+                  ))}
+                </ul>
+              )}
+
+              {project.tags && project.tags.length > 0 && (
+                <div className="flex flex-wrap gap-2">
+                  {project.tags.map((tag, i) => (
+                    <span
+                      key={i}
+                      className="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm border border-purple-400/30"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </>
+          );
+
+          return project.github ? (
+            <a
+              key={index}
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-2xl hover:bg-white/15 hover:scale-[1.02] transition-all cursor-pointer group"
+            >
+              {content}
+            </a>
           ) : (
-            <h2 className="text-xl font-semibold">{project.title}</h2>
-          )}
-
-          {project.description.length > 0 && (
-            <ul className="list-disc list-outside pl-6 text-gray-800 dark:text-gray-300 mt-2 space-y-1">
-              {project.description.map((item, i) => (
-                <li key={i}>{item}</li>
-              ))}
-            </ul>
-          )}
-
-          {project.tags && (
-            <div className="flex flex-wrap mt-4 gap-2">
-              {project.tags.map((tag, i) => (
-                <span
-                  key={i}
-                  className="px-2 py-1 text-sm rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200"
-                >
-                  {tag}
-                </span>
-              ))}
+            <div
+              key={index}
+              className="block bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-2xl"
+            >
+              {content}
             </div>
-          )}
-        </div>
-      ))}
+          );
+        })}
+      </div>
     </main>
   )
 }
