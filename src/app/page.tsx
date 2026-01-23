@@ -1,6 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { Music, Code, Github, Mountain, Linkedin, ChefHat } from 'lucide-react';
+import { getFeaturedProjects } from '@/data/projects';
 
 export default function PersonalLandingPage() {
   const [data, setData] = useState(null);
@@ -9,6 +10,7 @@ export default function PersonalLandingPage() {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // pulling spotify data
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -30,56 +32,11 @@ export default function PersonalLandingPage() {
     return () => clearInterval(intervalId);
   }, []);
 
+  // pulling the rest of the data
   useEffect(() => {
     // Mock projects data
-    const mockProjects = [
-      { 
-        id: 1, 
-        name: 'Project One', 
-        description: 'A cool web application built with React and Node.js',
-        tech: ['React', 'Node.js', 'MongoDB'],
-        link: '#'
-      },
-      { 
-        id: 2, 
-        name: 'Project Two', 
-        description: 'Mobile app for tracking fitness goals',
-        tech: ['React Native', 'Firebase'],
-        link: '#'
-      },
-      { 
-        id: 3, 
-        name: 'Project Three', 
-        description: 'Data visualization dashboard for analytics',
-        tech: ['Next.js', 'D3.js', 'PostgreSQL'],
-        link: '#'
-      },
-    ];
-
-    // Mock recipes data
-    const mockRecipes = [
-      {
-        id: 1,
-        name: 'Homemade Sourdough Bread',
-        category: 'Baking',
-        prepTime: '24 hours',
-        difficulty: 'Intermediate'
-      },
-      {
-        id: 2,
-        name: 'Thai Green Curry',
-        category: 'Main Course',
-        prepTime: '45 min',
-        difficulty: 'Easy'
-      },
-      {
-        id: 3,
-        name: 'Classic Tiramisu',
-        category: 'Dessert',
-        prepTime: '30 min',
-        difficulty: 'Easy'
-      },
-    ];
+    const featuredProjects = getFeaturedProjects();
+    setProjects(featuredProjects);
     
     const fetchTrips = async () => {
       try {
@@ -93,9 +50,8 @@ export default function PersonalLandingPage() {
       };
     
     fetchTrips();
-    setProjects(mockProjects);
-    setRecipes(mockRecipes);
     setLoading(false);
+
   }, []);
 
   return (
