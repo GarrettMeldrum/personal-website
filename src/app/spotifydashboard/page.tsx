@@ -73,11 +73,8 @@ export default function SpotifyDashboard() {
       {/* Header */}
       <header className="text-center mb-12">
         <h1 className="text-5xl font-bold text-white mb-4 bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-blue-400">
-          Spotify Analytics
+          Spotify Dashboard
         </h1>
-        <p className="text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed">
-          Deep dive into your listening habits and discover your music patterns.
-        </p>
       </header>
 
       {/* Stats Grid */}

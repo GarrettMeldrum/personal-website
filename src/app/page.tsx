@@ -34,7 +34,7 @@ export default function PersonalLandingPage() {
 
   // pulling the rest of the data
   useEffect(() => {
-    // Mock projects data
+
     const featuredProjects = getFeaturedProjects();
     setProjects(featuredProjects);
     
@@ -62,16 +62,14 @@ export default function PersonalLandingPage() {
           Garrett Meldrum
         </h1>
         <p className="text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed">
-          I'm a passionate developer who loves building beautiful, functional web experiences. 
-          When I'm not coding, you'll find me exploring new music, contributing to open source, 
-          or learning the latest technologies in the ever-evolving world of web development.
+          I'm passionate about learning and growing as a programmer. I plan to seek higher education to pursue my passion of computer science. In my freetime, I enjoy climbing, mountaineering, cooking, and homebrewing.
         </p>
       </header>
 
       {/* Platforms Section */}
       <section className="mb-8">
         <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-2xl">
-          <h2 className="text-2xl font-semibold text-white mb-6">Platforms</h2>
+          <h2 className="text-2xl font-semibold text-white mb-6">Social Platforms</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <a
               href="https://github.com/GarrettMeldrum"
@@ -159,7 +157,7 @@ export default function PersonalLandingPage() {
                 href="/spotifydashboard"
                 className="block text-center py-2 text-sm text-green-400 hover:text-green-300 transition-colors"
               >
-                View More Analytics →
+                View Spotify Dashboard →
               </a>
             </div>
           )}
@@ -226,7 +224,7 @@ export default function PersonalLandingPage() {
                 href="/projects"
                 className="block text-center py-2 text-sm text-blue-400 hover:text-blue-300 transition-colors"
               >
-                View all projects →
+                View All Projects →
               </a>
             </div>
           )}

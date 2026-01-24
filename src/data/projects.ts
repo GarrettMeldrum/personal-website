@@ -4,7 +4,7 @@ export const projects = [
     name: 'Self-Hosting React/Next.js Personal Website', 
     description: 'My personal website is being self-hosted and served locally. This website is utilizing React/Next.js as a framework and uses Nginx to expose it to the internet.',
     tech: ['React', 'Next.js', 'Typescript', 'APIs', 'Self-Hosting','Nginx'],
-    link: '#',
+    link: '/projects',
     featured: true // Add this flag
   },
   { 
@@ -12,7 +12,7 @@ export const projects = [
     name: 'Matcha Purchasing Bot', 
     description: 'This is an orchestration of bots that monitor and execute purchases for specific brands matchas. The bot will automatically terminate when one of the slave bots successfully executes a purchase.',
     tech: ['Python', 'Selenium', 'Orchestration'],
-    link: '#',
+    link: 'https://github.com/GarrettMeldrum/matcha-bot',
     featured: true
   },
   { 

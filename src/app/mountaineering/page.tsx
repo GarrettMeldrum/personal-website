@@ -10,10 +10,10 @@ export default function MountaineeringIndex() {
       {/* Header */}
       <header className="text-center mb-12">
         <h1 className="text-5xl font-bold text-white mb-4 bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-red-400">
-          Mountaineering Adventures
+          Mountaineering Journeys
         </h1>
         <p className="text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed">
-          Stories and experiences from peaks around the world.
+          Documenting my mountaineering experience.
         </p>
       </header>
 
