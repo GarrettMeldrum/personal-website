@@ -15,12 +15,12 @@ export async function GET() {
       
       let formattedDate = data.date;
       if (data.date) {
-		const date = new Date(data.date);
-		formattedDate = date.toLocaleDateString('en-US', {
-			month: 'long',
-			year: 'numeric'
-		});
-	  }
+        const date = new Date(data.date);
+        formattedDate = date.toLocaleDateString('en-US', {
+          month: 'long',
+          year: 'numeric'
+        });
+      }
       
       return {
         id: filename.replace('.md', ''),
@@ -36,7 +36,7 @@ export async function GET() {
     const recentTrips = trips
       .sort((a, b) => new Date(b.rawDate).getTime() - new Date(a.rawDate).getTime())
       .slice(0, 3)
-      .map(({ rawDate: _rawDate, ...rest }) => rest);
+      .map(({ rawDate, ...rest }) => rest); // eslint-disable-line @typescript-eslint/no-unused-vars
     
     return NextResponse.json(recentTrips);
   } catch (error) {
