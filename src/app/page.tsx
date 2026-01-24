@@ -113,43 +113,6 @@ export default function PersonalLandingPage() {
         </div>
       </section>
 
-      {/* Recipes Section */}
-      <section className="mb-8">
-        <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-2xl">
-          <div className="flex items-center gap-3 mb-6">
-            <ChefHat className="w-6 h-6 text-amber-400" />
-            <h2 className="text-2xl font-semibold text-white">Favorite Recipes</h2>
-          </div>
-          
-          {loading ? (
-            <div className="flex justify-center py-8">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
-            </div>
-          ) : (
-            <div className="space-y-3">
-              {recipes.slice(0, 3).map((recipe) => (
-                <div 
-                  key={recipe.id} 
-                  className="flex items-center justify-between p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-colors"
-                >
-                  <div>
-                    <p className="text-white font-medium">{recipe.name}</p>
-                    <p className="text-gray-400 text-sm">{recipe.category} • {recipe.prepTime}</p>
-                  </div>
-                  <span className="text-amber-400 text-sm font-semibold">{recipe.difficulty}</span>
-                </div>
-              ))}
-              <a 
-                href="/recipes"
-                className="block text-center py-2 text-sm text-amber-400 hover:text-amber-300 transition-colors"
-              >
-                View all recipes →
-              </a>
-            </div>
-          )}
-        </div>
-      </section>
-
       {/* Spotify Section */}
       <section className="mb-8">
         <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-2xl">
@@ -167,7 +130,7 @@ export default function PersonalLandingPage() {
               {data.map((item, index) => (
                 <div 
                   key={item.id || index} 
-                  className="flex items-center gap-4 p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-colors"
+                  className="flex flex-col items-center p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-all hover:scale-105 border border-white/10"
                 >
                   {/* Album Cover - Only show for first (currently playing) track */}
                   {index === 0 && item.album_cover_url && (
@@ -294,7 +257,7 @@ export default function PersonalLandingPage() {
               {trips.slice(0, 3).map((trip) => (
                 <div 
                   key={trip.id} 
-                  className="p-5 bg-white/5 rounded-lg hover:bg-white/10 transition-all border border-white/10"
+                  className="block p-5 bg-white/5 rounded-lg hover:bg-white/10 transition-all hover:scale-[1.02] border border-white/10 cursor-pointer group"
                 >
                   <div className="flex items-start justify-between mb-2">
                     <h3 className="text-xl font-semibold text-white">{trip.peak}</h3>
