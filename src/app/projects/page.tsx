@@ -3,6 +3,7 @@
 import React from 'react'
 import { projects } from '@/data/projects';
 import { Code } from 'lucide-react';
+import Link from 'next/link';
 
 type Project = {
   title: string
@@ -26,7 +27,7 @@ export default function ProjectsPage() {
           Projects
         </h1>
         <p className="text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed">
-          A collection of projects I've built, ranging from web applications to data tools.
+          A collection of projects I&apos;ve built, ranging from web applications to data tools.
         </p>
       </div>
 
@@ -65,7 +66,7 @@ export default function ProjectsPage() {
           );
 
           return project.github ? (
-            <a
+            <Link
               key={index}
               href={project.github}
               target="_blank"
@@ -73,7 +74,7 @@ export default function ProjectsPage() {
               className="block p-6 bg-white/5 rounded-lg hover:bg-white/10 transition-all hover:scale-[1.02] border border-white/10 cursor-pointer group"
             >
               {content}
-            </a>
+            </Link>
           ) : (
             <div
               key={index}

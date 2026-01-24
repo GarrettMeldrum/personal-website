@@ -1,13 +1,14 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { Music, Code, Github, Mountain, Linkedin, ChefHat } from 'lucide-react';
+import { Music, Code, Github, Mountain, Linkedin } from 'lucide-react';
 import { getFeaturedProjects } from '@/data/projects';
+import Image from 'next/image';
+import Link from 'next/link';
 
 export default function PersonalLandingPage() {
   const [data, setData] = useState(null);
   const [projects, setProjects] = useState([]);
   const [trips, setTrips] = useState([]);
-  const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
 
   // pulling spotify data
@@ -62,7 +63,7 @@ export default function PersonalLandingPage() {
           Garrett Meldrum
         </h1>
         <p className="text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed">
-          I'm passionate about learning and growing as a programmer. I plan to seek higher education to pursue my passion of computer science. In my freetime, I enjoy climbing, mountaineering, cooking, and homebrewing.
+          I&apos;m passionate about learning and growing as a programmer. I plan to seek higher education to pursue my passion of computer science. In my freetime, I enjoy climbing, mountaineering, cooking, and homebrewing.
         </p>
       </header>
 
@@ -71,7 +72,7 @@ export default function PersonalLandingPage() {
         <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-2xl">
           <h2 className="text-2xl font-semibold text-white mb-6">Social Platforms</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <a
+            <Link
               href="https://github.com/GarrettMeldrum"
               target="_blank"
               rel="noopener noreferrer"
@@ -79,8 +80,8 @@ export default function PersonalLandingPage() {
             >
               <Github className="w-8 h-8 text-white mb-2" />
               <span className="text-sm text-gray-300">GitHub</span>
-            </a>
-            <a
+            </Link>
+            <Link
               href="https://linkedin.com/in/garrett-meldrum/"
               target="_blank"
               rel="noopener noreferrer"
@@ -88,8 +89,8 @@ export default function PersonalLandingPage() {
             >
               <Linkedin className="w-8 h-8 text-blue-400 mb-2" />
               <span className="text-sm text-gray-300">LinkedIn</span>
-            </a>
-            <a
+            </Link>
+            <Link
               href="https://leetcode.com/u/garrettmeldrum/"
               target="_blank"
               rel="noopener noreferrer"
@@ -97,8 +98,8 @@ export default function PersonalLandingPage() {
             >
               <Code className="w-8 h-8 text-yellow-400 mb-2" />
               <span className="text-sm text-gray-300">LeetCode</span>
-            </a>
-            <a
+            </Link>
+            <Link
               href="https://alltrails.com/members/garrett-meldrum"
               target="_blank"
               rel="noopener noreferrer"
@@ -106,7 +107,7 @@ export default function PersonalLandingPage() {
             >
               <Mountain className="w-8 h-8 text-green-400 mb-2" />
               <span className="text-sm text-gray-300">AllTrails</span>
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -133,9 +134,11 @@ export default function PersonalLandingPage() {
                   {/* Album Cover - Only show for first (currently playing) track */}
                   {index === 0 && item.album_cover_url && (
                     <div className="flex-shrink-0">
-                      <img 
+                      <Image 
                         src={item.album_cover_url} 
                         alt={`${item.album_name} cover`}
+                        width={64}
+                        height={64}
                         className="w-16 h-16 rounded-full object-cover animate-spin-slow"
                         style={{ animationPlayState: item.is_playing ? 'running' : 'paused' }}
                       />
@@ -153,12 +156,12 @@ export default function PersonalLandingPage() {
                   </div>
                 </div>
               ))}
-              <a 
+              <Link 
                 href="/spotifydashboard"
                 className="block text-center py-2 text-sm text-green-400 hover:text-green-300 transition-colors"
               >
                 View Spotify Dashboard →
-              </a>
+              </Link>
             </div>
           )}
         </div>
@@ -199,7 +202,7 @@ export default function PersonalLandingPage() {
           ) : (
             <div className="space-y-4">
               {projects.slice(0, 3).map((project) => (
-                <a
+                <Link
                   key={project.id}
                   href={project.link}
                   target="_blank"
@@ -218,14 +221,14 @@ export default function PersonalLandingPage() {
                       </span>
                     ))}
                   </div>
-                </a>
+                </Link>
               ))}
-              <a 
+              <Link 
                 href="/projects"
                 className="block text-center py-2 text-sm text-blue-400 hover:text-blue-300 transition-colors"
               >
                 View All Projects →
-              </a>
+              </Link>
             </div>
           )}
         </div>
@@ -260,12 +263,12 @@ export default function PersonalLandingPage() {
                   </div>
                 </div>
               ))}
-              <a 
+              <Link 
                 href="/mountaineering"
                 className="block text-center py-2 text-sm text-orange-400 hover:text-orange-300 transition-colors"
               >
                 View all trips →
-              </a>
+              </Link>
             </div>
           )}
         </div>

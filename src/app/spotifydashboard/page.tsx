@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Music, TrendingUp, Clock, User, Disc } from 'lucide-react';
+import Image from 'next/image';
 
 interface AnalyticsData {
   stats: {
@@ -123,9 +124,11 @@ export default function SpotifyDashboard() {
                 </span>
 
                 {track.album_cover_url && (
-                  <img
+                  <Image
                     src={track.album_cover_url}
                     alt={track.album_name}
+                    width={48}
+                    height={48}
                     className="w-12 h-12 rounded object-cover"
                   />
                 )}
@@ -193,9 +196,11 @@ export default function SpotifyDashboard() {
             >
               <div className="flex items-center gap-3 flex-1 min-w-0">
                 {track.album_cover_url && (
-                  <img
+                  <Image
                     src={track.album_cover_url}
                     alt={track.album_name}
+                    width={40}
+                    height={40}
                     className="w-10 h-10 rounded object-cover flex-shrink-0"
                   />
                 )}

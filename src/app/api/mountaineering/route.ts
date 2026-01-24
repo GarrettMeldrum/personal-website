@@ -36,7 +36,7 @@ export async function GET() {
     const recentTrips = trips
       .sort((a, b) => new Date(b.rawDate).getTime() - new Date(a.rawDate).getTime())
       .slice(0, 3)
-      .map(({ rawDate, ...rest }) => rest);
+      .map(({ rawDate: _rawDate, ...rest }) => rest);
     
     return NextResponse.json(recentTrips);
   } catch (error) {
