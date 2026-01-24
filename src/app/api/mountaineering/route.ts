@@ -13,19 +13,30 @@ export async function GET() {
       const fileContents = fs.readFileSync(filePath, 'utf8');
       const { data } = matter(fileContents);
       
+      let formattedDate = data.date;
+      if (data.date) {
+		const date = new Date(data.date);
+		formattedDate = date.toLocaleDateString('en-US', {
+			month: 'long',
+			year: 'numeric'
+		});
+	  }
+      
       return {
         id: filename.replace('.md', ''),
         peak: data.peak,
         elevation: data.elevation,
         route: data.route,
-        date: data.date,
+        date: formattedDate,
+        rawDate: data.date,
       };
     });
     
     // Sort by date, newest first, return top 3
     const recentTrips = trips
-      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-      .slice(0, 3);
+      .sort((a, b) => new Date(b.rawDate).getTime() - new Date(a.rawDate).getTime())
+      .slice(0, 3)
+      .map(({ rawDate, ...rest }) => rest);
     
     return NextResponse.json(recentTrips);
   } catch (error) {

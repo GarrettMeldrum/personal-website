@@ -36,8 +36,8 @@ export async function GET() {
 		}
 
 		const data = await response.json();
-
-		// Remove caching for real-time updates
+		
+		// Just pass through the data - Flask API already includes is_playing
 		return NextResponse.json(data, {
 			headers: {
 				'Cache-Control': 'no-store, no-cache, must-revalidate',

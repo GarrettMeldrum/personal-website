@@ -1,36 +1,56 @@
 import { getAllPosts, type Post } from '@/lib/blog';
 import Link from 'next/link';
-import Image from 'next/image';
+import { Mountain } from 'lucide-react';
 
 export default function MountaineeringIndex() {
   const posts: Post[] = getAllPosts();
-
+  
   return (
-    <div className="px-6 py-10 space-y-8">
-      <h1 className="text-4xl font-bold text-center">Mountaineering Blog Posts</h1>
-      {posts.map((post) => (
-        <Link 
-          key={post.slug}
-          href={`/mountaineering/${post.slug}`}
-          className='block'
-        >
-          <div className="border rounded-lg p-4 shadow-md mx-auto max-w-2xl text-center">
-            <p className="text-2xl">{post.title}</p>
-            <p className="text-sm text-gray-500">{post.date}</p>
-            {typeof post.image === 'string' && post.image.trim() !== '' && (
-              <div className="relative w-full max-w-2xl h-96 mt-4 mx-auto">
-                <Image
-                  src={post.image}
-                  alt={post.title}
-                  fill
-                  className="object-cover rounded-lg"
-                  sizes="(max-width: 768px) 100vw, 600px"
-                />
+    <div className="max-w-4xl mx-auto px-6 py-16">
+      {/* Header */}
+      <header className="text-center mb-12">
+        <h1 className="text-5xl font-bold text-white mb-4 bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-red-400">
+          Mountaineering Adventures
+        </h1>
+        <p className="text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed">
+          Stories and experiences from peaks around the world.
+        </p>
+      </header>
+
+      {/* Blog Posts */}
+      <div className="space-y-6">
+        {posts.map((post) => (
+          <Link 
+            key={post.slug}
+            href={`/mountaineering/${post.slug}`}
+            className="block"
+          >
+            <article className="bg-white/10 rounded-2xl p-6 border border-white/20 shadow-2xl hover:bg-white/15 hover:scale-[1.02] transition-all cursor-pointer group">
+              <div className="flex items-center gap-3 mb-3">
+                <Mountain className="w-6 h-6 text-orange-400 flex-shrink-0" />
+                <h2 className="text-2xl font-semibold text-white">
+                  {post.title}
+                </h2>
               </div>
-            )}
-          </div>
-        </Link>
-      ))}
+
+              <p className="text-gray-400 text-sm">
+                {new Date(post.date).toLocaleDateString('en-US', { 
+                  month: 'long', 
+                  day: 'numeric',
+                  year: 'numeric' 
+                })}
+              </p>
+
+              {/* Optional: Add excerpt if available */}
+              {post.excerpt && (
+                <p className="text-gray-300 mt-3">
+                  {post.excerpt}
+                </p>
+              )}
+            </article>
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }

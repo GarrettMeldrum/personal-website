@@ -36,17 +36,17 @@ export default function ProjectsPage() {
             <>
               <div className="flex items-center gap-3 mb-3">
                 <Code className="w-6 h-6 text-blue-400" />
-                <h2 className="text-2xl font-semibold text-white group-hover:text-blue-400 transition-colors">
+                <h2 className="text-2xl font-semibold text-white">
                   {project.title}
                 </h2>
               </div>
 
               {project.description.length > 0 && (
-                <ul className="list-disc list-outside pl-6 text-gray-300 space-y-2 mb-4">
+                <div className="text-gray-300 space-y-2 mb-4">
                   {project.description.map((item, i) => (
-                    <li key={i}>{item}</li>
+                    <p key={i}>{item}</p>
                   ))}
-                </ul>
+                </div>
               )}
 
               {project.tags && project.tags.length > 0 && (
@@ -70,14 +70,14 @@ export default function ProjectsPage() {
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="block bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-2xl hover:bg-white/15 hover:scale-[1.02] transition-all cursor-pointer group"
+              className="block p-6 bg-white/5 rounded-lg hover:bg-white/10 transition-all hover:scale-[1.02] border border-white/10 cursor-pointer group"
             >
               {content}
             </a>
           ) : (
             <div
               key={index}
-              className="block bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-2xl"
+              className="block p-6 bg-white/5 rounded-lg hover:bg-white/10 transition-all hover:scale-[1.02] border border-white/10"
             >
               {content}
             </div>

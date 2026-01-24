@@ -77,7 +77,7 @@ export default function PersonalLandingPage() {
               href="https://github.com/GarrettMeldrum"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex flex-col items-center p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-all hover:scale-105 border border-white/10"
+              className="flex flex-col items-center p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-all hover:scale-[1.02] border border-white/10"
             >
               <Github className="w-8 h-8 text-white mb-2" />
               <span className="text-sm text-gray-300">GitHub</span>
@@ -86,7 +86,7 @@ export default function PersonalLandingPage() {
               href="https://linkedin.com/in/garrett-meldrum/"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex flex-col items-center p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-all hover:scale-105 border border-white/10"
+              className="flex flex-col items-center p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-all hover:scale-[1.02] border border-white/10"
             >
               <Linkedin className="w-8 h-8 text-blue-400 mb-2" />
               <span className="text-sm text-gray-300">LinkedIn</span>
@@ -95,7 +95,7 @@ export default function PersonalLandingPage() {
               href="https://leetcode.com/u/garrettmeldrum/"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex flex-col items-center p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-all hover:scale-105 border border-white/10"
+              className="flex flex-col items-center p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-all hover:scale-[1.02] border border-white/10"
             >
               <Code className="w-8 h-8 text-yellow-400 mb-2" />
               <span className="text-sm text-gray-300">LeetCode</span>
@@ -104,7 +104,7 @@ export default function PersonalLandingPage() {
               href="https://alltrails.com/members/garrett-meldrum"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex flex-col items-center p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-all hover:scale-105 border border-white/10"
+              className="flex flex-col items-center p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-all hover:scale-[1.02] border border-white/10"
             >
               <Mountain className="w-8 h-8 text-green-400 mb-2" />
               <span className="text-sm text-gray-300">AllTrails</span>
@@ -130,7 +130,7 @@ export default function PersonalLandingPage() {
               {data.map((item, index) => (
                 <div 
                   key={item.id || index} 
-                  className="flex flex-col items-center p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-all hover:scale-105 border border-white/10"
+                  className="flex items-center p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-all hover:scale-[1.02] border border-white/10 gap-4"
                 >
                   {/* Album Cover - Only show for first (currently playing) track */}
                   {index === 0 && item.album_cover_url && (
@@ -139,31 +139,24 @@ export default function PersonalLandingPage() {
                         src={item.album_cover_url} 
                         alt={`${item.album_name} cover`}
                         className="w-16 h-16 rounded-full object-cover animate-spin-slow"
+                        style={{ animationPlayState: item.is_playing ? 'running' : 'paused' }}
                       />
                     </div>
                   )}
                   
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2">
-                      <p className="text-white font-medium truncate">{item.track_name}</p>
-                      {index === 0 && (
-                        <div className="flex items-center gap-1 flex-shrink-0">
-                          <div className="w-1 h-3 bg-green-400 rounded-full animate-pulse"></div>
-                          <div className="w-1 h-4 bg-green-400 rounded-full animate-pulse delay-75"></div>
-                          <div className="w-1 h-3 bg-green-400 rounded-full animate-pulse delay-150"></div>
-                        </div>
-                      )}
+                    <div className="flex items-center justify-between gap-2">
+                      <p className="text-white font-medium truncate flex-1">{item.track_name}</p>
+                      <span className="text-green-400 text-sm font-semibold flex-shrink-0">
+                        {item.play_count || 0} plays
+                      </span>
                     </div>
                     <p className="text-gray-400 text-sm truncate">{item.artist_name} • {item.album_name}</p>
                   </div>
-                  
-                  <span className="text-green-400 text-sm font-semibold flex-shrink-0">
-                    {item.play_count || 0} plays
-                  </span>
                 </div>
               ))}
               <a 
-                href="/music-analytics"
+                href="/spotifydashboard"
                 className="block text-center py-2 text-sm text-green-400 hover:text-green-300 transition-colors"
               >
                 View More Analytics →
