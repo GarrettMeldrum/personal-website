@@ -40,13 +40,6 @@ export default function MountaineeringIndex() {
                   year: 'numeric' 
                 })}
               </p>
-
-              {/* Optional: Add excerpt if available */}
-              {post.excerpt && (
-                <p className="text-gray-300 mt-3">
-                  {post.excerpt}
-                </p>
-              )}
             </article>
           </Link>
         ))}

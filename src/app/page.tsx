@@ -5,10 +5,38 @@ import { getFeaturedProjects } from '@/data/projects';
 import Image from 'next/image';
 import Link from 'next/link';
 
+// Add these type definitions
+type SpotifyTrack = {
+  id: number;
+  track_name: string;
+  artist_name: string;
+  album_name: string;
+  album_cover_url?: string;
+  play_count?: number;
+  is_playing?: boolean;
+};
+
+type Project = {
+  id: number;
+  name: string;
+  description: string;
+  tech: string[];
+  link: string;
+  featured: boolean;
+};
+
+type Trip = {
+  id: string;
+  peak: string;
+  elevation: string;
+  route: string;
+  date: string;
+};
+
 export default function PersonalLandingPage() {
-  const [data, setData] = useState(null);
-  const [projects, setProjects] = useState([]);
-  const [trips, setTrips] = useState([]);
+  const [data, setData] = useState<SpotifyTrack[] | null>(null); // Add type annotation
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [trips, setTrips] = useState<Trip[]>([]);
   const [loading, setLoading] = useState(true);
 
   // pulling spotify data

@@ -55,7 +55,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             prose-pre:bg-white/10 prose-pre:border prose-pre:border-white/20 prose-pre:rounded-lg prose-pre:p-4
             prose-img:rounded-lg prose-img:shadow-lg
           "
-          dangerouslySetInnerHTML={{ __html: post.content }}
+          dangerouslySetInnerHTML={{ __html: post.content || ''}}
         />
       </div>
     </main>
