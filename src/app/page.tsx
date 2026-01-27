@@ -167,6 +167,7 @@ export default function PersonalLandingPage() {
                         alt={`${item.album_name} cover`}
                         width={64}
                         height={64}
+                        unoptimized
                         className="w-16 h-16 rounded-full object-cover animate-spin-slow"
                         style={{ animationPlayState: item.is_playing ? 'running' : 'paused' }}
                       />
@@ -193,26 +194,6 @@ export default function PersonalLandingPage() {
             </div>
           )}
         </div>
-        
-        <style jsx>{`
-          @keyframes spin-slow {
-            from {
-              transform: rotate(0deg);
-            }
-            to {
-              transform: rotate(360deg);
-            }
-          }
-          .animate-spin-slow {
-            animation: spin-slow 3s linear infinite;
-          }
-          .delay-75 {
-            animation-delay: 75ms;
-          }
-          .delay-150 {
-            animation-delay: 150ms;
-          }
-        `}</style>
       </section>
 
       {/* Projects Section */}
@@ -277,8 +258,9 @@ export default function PersonalLandingPage() {
           ) : (
             <div className="space-y-4">
               {trips.slice(0, 3).map((trip) => (
-                <div 
-                  key={trip.id} 
+                <Link
+                  key={trip.id}
+                  href={`/mountaineering/${trip.id}`}
                   className="block p-5 bg-white/5 rounded-lg hover:bg-white/10 transition-all hover:scale-[1.02] border border-white/10 cursor-pointer group"
                 >
                   <div className="flex items-start justify-between mb-2">
@@ -289,7 +271,7 @@ export default function PersonalLandingPage() {
                     <span className="text-gray-300 text-sm">{trip.route}</span>
                     <span className="text-gray-400 text-sm">{trip.date}</span>
                   </div>
-                </div>
+                </Link>
               ))}
               <Link 
                 href="/mountaineering"

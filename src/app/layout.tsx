@@ -1,35 +1,34 @@
-'use client';
 import { Lora } from 'next/font/google';
 import "./globals.css";
 import React, { type ReactNode } from "react";
+import type { Metadata } from 'next';
 
 const lora = Lora({
   subsets: ["latin"],
   variable: "--font-lora",
 });
 
+export const metadata: Metadata = {
+  title: {
+    default: "Garrett Meldrum",
+    template: '%s | Garrett Meldrum',
+  },
+  description: "Personal website to show off programming projects, mountaineering/climbing journeys, and achievements in my career",
+  keywords: ['Garrett Meldrum', 'software developer', 'web developer', 'React', 'Next.js', 'Mountaineering',
+              'Colorado', 'Denver', 'Portfolio', '14ers', 'Mountains', 'Personal Website', 'Portfolio Website'],
+  authors: [{ name: 'Garrett Meldrum'}],
+  creator: 'Garrett Meldrum',
+  
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/apple-icon.png',
+  },
+};
+
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={lora.variable}>
-      <body className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 animate-gradient">
-        <style jsx global>{`
-          @keyframes gradient {
-            0% {
-              background-position: 0% 50%;
-            }
-            50% {
-              background-position: 100% 50%;
-            }
-            100% {
-              background-position: 0% 50%;
-            }
-          }
-          .animate-gradient {
-            background: linear-gradient(-45deg, #0f172a, #581c87, #1e1b4b, #065f46, #7c2d12);
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
-          }
-        `}</style>
+      <body className="min-h-screen animate-gradient">
         <main>{children}</main>
       </body>
     </html>

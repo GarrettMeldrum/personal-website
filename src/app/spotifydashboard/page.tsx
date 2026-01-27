@@ -129,6 +129,7 @@ export default function SpotifyDashboard() {
                     alt={track.album_name}
                     width={48}
                     height={48}
+                    unoptimized
                     className="w-12 h-12 rounded object-cover"
                   />
                 )}
@@ -201,6 +202,7 @@ export default function SpotifyDashboard() {
                     alt={track.album_name}
                     width={40}
                     height={40}
+                    unoptimized
                     className="w-10 h-10 rounded object-cover flex-shrink-0"
                   />
                 )}
