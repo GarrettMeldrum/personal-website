@@ -15,7 +15,7 @@ interface AnalyticsData {
     track_name: string;
     artist_name: string;
     album_name: string;
-    album_cover_url?: string;
+    album_image_url?: string;
     play_count: number;
   }>;
   top_artists: Array<{
@@ -23,28 +23,36 @@ interface AnalyticsData {
     play_count: number;
   }>;
   recent_plays: Array<{
-    id: number;
+    played_at: string;
     track_name: string;
     artist_name: string;
     album_name: string;
-    album_cover_url?: string;
-    played_at: string;
+    album_image_url?: string;
+    track_duration_ms: number;
   }>;
 }
 
 export default function SpotifyDashboard() {
   const [data, setData] = useState<AnalyticsData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch('/api/spotify-analytics', { cache: "no-store" });
+        
+        if (!response.ok) {
+          throw new Error('Failed to fetch analytics');
+        }
+        
         const result = await response.json();
         setData(result);
+        setError(null);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching analytics:', error);
+        setError('Unable to load analytics');
         setLoading(false);
       }
     };
@@ -67,6 +75,23 @@ export default function SpotifyDashboard() {
     );
   }
 
+  // ADDED: Show error state
+  if (error && !data) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-red-400 text-xl mb-4">⚠️ {error}</p>
+          <button 
+            onClick={() => window.location.reload()}
+            className="px-4 py-2 bg-green-400 text-black rounded-lg hover:bg-green-500"
+          >
+            Retry
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   if (!data) return null;
 
   return (
@@ -76,6 +101,10 @@ export default function SpotifyDashboard() {
         <h1 className="text-5xl font-bold text-white mb-4 bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-blue-400">
           Spotify Dashboard
         </h1>
+        
+        {error && (
+          <p className="text-yellow-400 text-sm">⚠️ {error} - Showing cached data</p>
+        )}
       </header>
 
       {/* Stats Grid */}
@@ -123,9 +152,9 @@ export default function SpotifyDashboard() {
                   {index + 1}
                 </span>
 
-                {track.album_cover_url && (
+                {track.album_image_url && (
                   <Image
-                    src={track.album_cover_url}
+                    src={track.album_image_url}
                     alt={track.album_name}
                     width={48}
                     height={48}
@@ -192,13 +221,13 @@ export default function SpotifyDashboard() {
         <div className="space-y-2">
           {data.recent_plays.map((track) => (
             <div
-              key={track.id}
+              key={track.played_at}
               className="flex items-center justify-between p-3 bg-white/5 rounded-lg hover:bg-white/10 transition-all"
             >
               <div className="flex items-center gap-3 flex-1 min-w-0">
-                {track.album_cover_url && (
+                {track.album_image_url && (
                   <Image
-                    src={track.album_cover_url}
+                    src={track.album_image_url}
                     alt={track.album_name}
                     width={40}
                     height={40}
@@ -213,7 +242,7 @@ export default function SpotifyDashboard() {
               </div>
 
               <span className="text-gray-400 text-xs flex-shrink-0">
-                {new Date(parseInt(track.played_at)).toLocaleDateString()}
+                {new Date(track.played_at).toLocaleDateString()}
               </span>
             </div>
           ))}

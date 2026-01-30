@@ -1,19 +1,31 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Music, Code, Github, Mountain, Linkedin } from 'lucide-react';
 import { getFeaturedProjects } from '@/data/projects';
 import Image from 'next/image';
 import Link from 'next/link';
 
 // Add these type definitions
-type SpotifyTrack = {
-  id: number;
-  track_name: string;
-  artist_name: string;
-  album_name: string;
-  album_cover_url?: string;
-  play_count?: number;
-  is_playing?: boolean;
+type CurrentlyPlaying = {
+  is_playing: boolean;
+  progress_ms?: number;
+  track? : {
+    track_id: string;
+    track_name: string;
+    artist_name: string;
+    album_image_url?: string;
+    track_duration_ms: number;
+    track_spotify_url: string;
+    play_count: number;
+  };
+  tracks?: Array<{
+    track_id: string;
+    track_name: string;
+    artist_name: string;
+    album_name: string;
+    album_image_url?: string;
+    track_duration_ms: number;
+  }>;
 };
 
 type Project = {
@@ -33,35 +45,61 @@ type Trip = {
   date: string;
 };
 
+const poll_interval = 3000;
+
 export default function PersonalLandingPage() {
-  const [data, setData] = useState<SpotifyTrack[] | null>(null); // Add type annotation
+  const [spotifyData, setSpotifyData] = useState<CurrentlyPlaying | null>(null);
   const [projects, setProjects] = useState<Project[]>([]);
   const [trips, setTrips] = useState<Trip[]>([]);
   const [loading, setLoading] = useState(true);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   // pulling spotify data
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchSpotify = async () => {
       try {
-        const response = await fetch('/api/recent', { cache: "no-store" });
+        const response = await fetch('/api/currently-playing', { cache: "no-store", signal: AbortSignal.timeout(5000) });
+        
+        if (!response.ok) throw new Error('Failed to fetch');
+
         const result = await response.json();
-        setData(result);
+        setSpotifyData(result);
+
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
 
-    // Initial fetch
-    fetchData();
+    const startPolling = () => {
+      fetchSpotify();
+      intervalRef.current = setInterval(fetchSpotify, poll_interval);
+    };
 
-    // Set up polling interval (every 2.5 seconds)
-    const intervalId = setInterval(fetchData, 2500);
+    const stopPolling = () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+    };
 
-    // Clean up interval on component unmount
-    return () => clearInterval(intervalId);
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        stopPolling();
+      } else {
+        startPolling();
+      }
+    };
+
+    startPolling();
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      stopPolling();
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
   }, []);
 
-  // pulling the rest of the data
+  // pulling projects and mountaineering trips
   useEffect(() => {
 
     const featuredProjects = getFeaturedProjects();
@@ -140,61 +178,134 @@ export default function PersonalLandingPage() {
         </div>
       </section>
 
-      {/* Spotify Section */}
+      {/* Now Playing Section - Only show if playing */}
+      {spotifyData?.is_playing && spotifyData.track && (
+        <section className="mb-8">
+          <div className="bg-gradient-to-br from-green-500/20 to-blue-500/20 backdrop-blur-lg rounded-2xl p-6 border border-green-400/30 shadow-2xl">
+            <div className="flex items-center gap-3 mb-6">
+              <Music className="w-6 h-6 text-green-400" />
+              <h2 className="text-2xl font-semibold text-white">🎵 Now Playing</h2>
+            </div>
+            
+            <div className="flex items-center gap-6">
+              {spotifyData.track.album_image_url && (
+                <div className="flex-shrink-0">
+                  <Image 
+                    src={spotifyData.track.album_image_url} 
+                    alt={`${spotifyData.track.album_name} cover`}
+                    width={96}
+                    height={96}
+                    unoptimized
+                    className="w-24 h-24 rounded-full object-cover animate-spin-slow shadow-lg"
+                  />
+                </div>
+              )}
+              
+              <div className="flex-1 min-w-0">
+                <p className="text-2xl font-bold text-white mb-1 truncate">
+                  {spotifyData.track.track_name}
+                </p>
+                <p className="text-gray-300 text-lg mb-2 truncate">
+                  {spotifyData.track.artist_name}
+                </p>
+                <p className="text-gray-400 text-sm truncate mb-3">
+                  {spotifyData.track.album_name}
+                </p>
+                
+                {/* Progress bar */}
+                {spotifyData.progress_ms !== undefined && (
+                  <div className="mt-3">
+                    <div className="bg-white/20 rounded-full h-1.5 overflow-hidden">
+                      <div 
+                        className="bg-green-400 h-full rounded-full transition-all duration-1000"
+                        style={{ 
+                          width: `${(spotifyData.progress_ms / spotifyData.track.track_duration_ms) * 100}%` 
+                        }}
+                      />
+                    </div>
+                    <div className="flex justify-between text-xs text-gray-400 mt-1">
+                      <span>
+                        {Math.floor(spotifyData.progress_ms / 1000 / 60)}:
+                        {String(Math.floor((spotifyData.progress_ms / 1000) % 60)).padStart(2, '0')}
+                      </span>
+                      <span>
+                        {Math.floor(spotifyData.track.track_duration_ms / 1000 / 60)}:
+                        {String(Math.floor((spotifyData.track.track_duration_ms / 1000) % 60)).padStart(2, '0')}
+                      </span>
+                    </div>
+                  </div>
+                )}
+                
+                <div className="flex items-center gap-4 mt-3">
+                  <span className="text-green-400 text-sm font-semibold">
+                    {spotifyData.track.play_count} total plays
+                  </span>
+                  <a 
+                    href={spotifyData.track.track_spotify_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-green-400 hover:text-green-300 text-sm transition-colors"
+                  >
+                    Open in Spotify →
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Recently Played Section */}
       <section className="mb-8">
         <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-2xl">
           <div className="flex items-center gap-3 mb-6">
-            <Music className="w-6 h-6 text-green-400" />
-            <h2 className="text-2xl font-semibold text-white">Currently Listening</h2>
+            <Clock className="w-6 h-6 text-blue-400" />
+            <h2 className="text-2xl font-semibold text-white">Recently Played</h2>
           </div>
           
-          {!data ? (
+          {!spotifyData ? (
             <div className="flex justify-center py-8">
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
             </div>
-          ) : (
+          ) : spotifyData.tracks && spotifyData.tracks.length > 0 ? (
             <div className="space-y-3">
-              {data.map((item, index) => (
+              {spotifyData.tracks.slice(0, 3).map((track) => (
                 <div 
-                  key={item.id || index} 
+                  key={track.track_id} 
                   className="flex items-center p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-all hover:scale-[1.02] border border-white/10 gap-4"
                 >
-                  {/* Album Cover - Only show for first (currently playing) track */}
-                  {index === 0 && item.album_cover_url && (
-                    <div className="flex-shrink-0">
-                      <Image 
-                        src={item.album_cover_url} 
-                        alt={`${item.album_name} cover`}
-                        width={64}
-                        height={64}
-                        unoptimized
-                        className="w-16 h-16 rounded-full object-cover animate-spin-slow"
-                        style={{ animationPlayState: item.is_playing ? 'running' : 'paused' }}
-                      />
-                    </div>
+                  {track.album_image_url && (
+                    <Image 
+                      src={track.album_image_url} 
+                      alt={`${track.album_name} cover`}
+                      width={48}
+                      height={48}
+                      unoptimized
+                      className="w-12 h-12 rounded object-cover"
+                    />
                   )}
                   
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center justify-between gap-2">
-                      <p className="text-white font-medium truncate flex-1">{item.track_name}</p>
-                      <span className="text-green-400 text-sm font-semibold flex-shrink-0">
-                        {item.play_count || 0} plays
-                      </span>
-                    </div>
-                    <p className="text-gray-400 text-sm truncate">{item.artist_name} • {item.album_name}</p>
+                    <p className="text-white font-medium truncate">{track.track_name}</p>
+                    <p className="text-gray-400 text-sm truncate">
+                      {track.artist_name} • {track.album_name}
+                    </p>
                   </div>
                 </div>
               ))}
               <Link 
                 href="/spotifydashboard"
-                className="block text-center py-2 text-sm text-green-400 hover:text-green-300 transition-colors"
+                className="block text-center py-2 text-sm text-blue-400 hover:text-blue-300 transition-colors"
               >
-                View Spotify Dashboard →
+                View Full Dashboard →
               </Link>
             </div>
+          ) : (
+            <p className="text-gray-400 text-center py-8">No recent tracks</p>
           )}
         </div>
       </section>
+
 
       {/* Projects Section */}
       <section className="mb-8">
