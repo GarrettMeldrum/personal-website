@@ -178,15 +178,21 @@ export default function PersonalLandingPage() {
         </div>
       </section>
 
-      {/* Now Playing Section - Only show if playing */}
-      {spotifyData?.is_playing && spotifyData.track && (
-        <section className="mb-8">
-          <div className="bg-gradient-to-br from-green-500/20 to-blue-500/20 backdrop-blur-lg rounded-2xl p-6 border border-green-400/30 shadow-2xl">
-            <div className="flex items-center gap-3 mb-6">
-              <Music className="w-6 h-6 text-green-400" />
-              <h2 className="text-2xl font-semibold text-white">🎵 Now Playing</h2>
+      {/* Now Playing Section - Always visible */}
+      <section className="mb-8">
+        <div className="bg-gradient-to-br from-green-500/20 to-blue-500/20 backdrop-blur-lg rounded-2xl p-6 border border-green-400/30 shadow-2xl">
+          <div className="flex items-center gap-3 mb-6">
+            <Music className="w-6 h-6 text-green-400" />
+            <h2 className="text-2xl font-semibold text-white">
+              {spotifyData?.is_playing ? 'Now Playing' : 'Was Playing'}
+            </h2>
+          </div>
+          
+          {!spotifyData ? (
+            <div className="flex justify-center py-8">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-400"></div>
             </div>
-            
+          ) : spotifyData.is_playing && spotifyData.track ? (
             <div className="flex items-center gap-6">
               {spotifyData.track.album_image_url && (
                 <div className="flex-shrink-0">
@@ -251,9 +257,14 @@ export default function PersonalLandingPage() {
                 </div>
               </div>
             </div>
-          </div>
-        </section>
-      )}
+          ) : (
+            <div className="text-center py-8">
+              <p className="text-gray-400 mb-4">No music playing right now</p>
+              <p className="text-gray-500 text-sm">Start playing on Spotify to see it here!</p>
+            </div>
+          )}
+        </div>
+      </section>
 
       {/* Recently Played Section */}
       <section className="mb-8">
