@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect, useRef } from 'react';
-import { Music, Code, Github, Mountain, Linkedin } from 'lucide-react';
+import { Music, Code, Github, Mountain, Linkedin, Clock } from 'lucide-react';
 import { getFeaturedProjects } from '@/data/projects';
 import Image from 'next/image';
 import Link from 'next/link';
