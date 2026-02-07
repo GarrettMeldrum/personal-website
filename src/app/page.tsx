@@ -30,7 +30,7 @@ type RecentPlay = {
   artist_name: string;
   album_name: string;
   album_image_url?: string;
-  track_duraction_ms: number;
+  track_duration_ms: number;
 };
 
 type Project = {
@@ -120,7 +120,7 @@ export default function PersonalLandingPage() {
         const response = await fetch('/api/spotify-analytics', { cache: "no-store"});
         if (!response.ok) throw new Error('Failed to fetch spotify analytics');
         const data = await response.json();
-        setRecentPlays(data.recentPlays ?? []);
+        setRecentPlays(data.recent_plays ?? []);
       } catch (error) {
         console.error('Error fetching spotify analytics:', error);
       }
