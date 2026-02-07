@@ -71,10 +71,10 @@ export default function PersonalLandingPage() {
     const fetchSpotify = async () => {
       try {
         const response = await fetch('/api/currently-playing', { cache: "no-store", signal: AbortSignal.timeout(5000) });
-        
+        const result = await response.json();
 
-        setSpotifyDate((prev) => {
-          if (!XPathResult.track && prev?.track) {
+        setSpotifyData((prev) => {
+          if (!result.track && prev?.track) {
             return { ...result, track: prev.track };
           }
           return result;
@@ -117,9 +117,9 @@ export default function PersonalLandingPage() {
   useEffect(() => {
     const fetchRecentPlays = async () => {
       try{
-        const repsonse = await fetch ('/api/spotify-analytics', { cache: "no-store"});
-        if (!Response.ok) throw new Error('Failed to fetch spotify analytics');
-        const data = await repsonse.json();
+        const response = await fetch('/api/spotify-analytics', { cache: "no-store"});
+        if (!response.ok) throw new Error('Failed to fetch spotify analytics');
+        const data = await response.json();
         setRecentPlays(data.recentPlays ?? []);
       } catch (error) {
         console.error('Error fetching spotify analytics:', error);
@@ -132,13 +132,16 @@ export default function PersonalLandingPage() {
     const fetchTrips = async () => {
       try {
         const response = await fetch('/api/mountaineering', { cache: "no-store" });
-        
         const mountaineeringData = await response.json();
         setTrips(mountaineeringData);
       } catch (error) {
         console.error('Error fetching mountaineering trips:', error);
         setTrips([]);
+      } finally {
+        setLoading(false);
       }
+    };
+    fetchTrips();
   }, []);
 
   const track = spotifyData?.track;
@@ -226,14 +229,14 @@ export default function PersonalLandingPage() {
                     width={96}
                     height={96}
                     unoptimized
-                    className="w-24 h-24 rounded-full object-cover shadow-lg ${isPlaying ? 'animate-spin-slow' : ''}"
+                    className={`w-24 h-24 rounded-full object-cover shadow-lg ${isPlaying ? 'animate-spin-slow' : ''}`}
                   />
                 </div>
               )}
               
               <div className="flex-1 min-w-0">
                 <p className="text-2xl font-bold text-white mb-1 truncate">
-                  {track}
+                  {track.track_name}
                 </p>
                 <p className="text-gray-300 text-lg mb-2 truncate">
                   {track.artist_name}
@@ -254,7 +257,7 @@ export default function PersonalLandingPage() {
                       />
                     </div>
                     <div className="flex justify-between text-xs text-gray-400 mt-1">
-                        <span>{formatTime(spotifyDate.progress_ms)}</span>
+                        <span>{formatTime(spotifyData.progress_ms)}</span>
                         <span>{formatTime(track.track_duration_ms)}</span>
                     </div>
                   </div>
@@ -277,7 +280,7 @@ export default function PersonalLandingPage() {
             </div>
           ) : (
             <div className="text-center py-8">
-              <p classNmae="text-gray-400">No recent track data available</p>
+              <p className="text-gray-400">No recent track data available</p>
             </div>
           )}
         </div>
