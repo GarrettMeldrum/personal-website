@@ -5,27 +5,32 @@ import { getFeaturedProjects } from '@/data/projects';
 import Image from 'next/image';
 import Link from 'next/link';
 
-// Add these type definitions
+
+type Track = {
+  track_id: string;
+  track_name: string;
+  artist_name: string;
+  album_name: string;
+  album_image_url?: string;
+  track_duration_ms: number;
+  track_spotify_url: string;
+  play_count: number;
+};
+
+
 type CurrentlyPlaying = {
   is_playing: boolean;
   progress_ms?: number;
-  track? : {
-    track_id: string;
-    track_name: string;
-    artist_name: string;
-    album_image_url?: string;
-    track_duration_ms: number;
-    track_spotify_url: string;
-    play_count: number;
-  };
-  tracks?: Array<{
-    track_id: string;
-    track_name: string;
-    artist_name: string;
-    album_name: string;
-    album_image_url?: string;
-    track_duration_ms: number;
-  }>;
+  track?: Track;
+};
+
+type RecentPlay = {
+  played_at: string;
+  track_name: string;
+  artist_name: string;
+  album_name: string;
+  album_image_url?: string;
+  track_duraction_ms: number;
 };
 
 type Project = {
@@ -45,11 +50,18 @@ type Trip = {
   date: string;
 };
 
-const poll_interval = 3000;
+const POLL_INTERVAL = 3000;
+
+function formatTime(ms: number) {
+  const minutes = Math.floor(ms / 1000 / 60);
+  const seconds = Math.floor((ms / 1000) % 60);
+  return `${minutes}:${String(seconds).padStart(2, '0')}`;
+}
 
 export default function PersonalLandingPage() {
   const [spotifyData, setSpotifyData] = useState<CurrentlyPlaying | null>(null);
-  const [projects, setProjects] = useState<Project[]>([]);
+  const [recentPlays, setRecentPlays] = useState<RecentPlay[] | null>(null);
+  const [projects] = useState<Project[]>(getFeaturedProjects());
   const [trips, setTrips] = useState<Trip[]>([]);
   const [loading, setLoading] = useState(true);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -60,19 +72,22 @@ export default function PersonalLandingPage() {
       try {
         const response = await fetch('/api/currently-playing', { cache: "no-store", signal: AbortSignal.timeout(5000) });
         
-        if (!response.ok) throw new Error('Failed to fetch');
 
-        const result = await response.json();
-        setSpotifyData(result);
+        setSpotifyDate((prev) => {
+          if (!XPathResult.track && prev?.track) {
+            return { ...result, track: prev.track };
+          }
+          return result;
+        });
 
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching currently playing:', error);
       }
     };
 
     const startPolling = () => {
       fetchSpotify();
-      intervalRef.current = setInterval(fetchSpotify, poll_interval);
+      intervalRef.current = setInterval(fetchSpotify, POLL_INTERVAL);
     };
 
     const stopPolling = () => {
@@ -99,27 +114,35 @@ export default function PersonalLandingPage() {
     };
   }, []);
 
-  // pulling projects and mountaineering trips
   useEffect(() => {
+    const fetchRecentPlays = async () => {
+      try{
+        const repsonse = await fetch ('/api/spotify-analytics', { cache: "no-store"});
+        if (!Response.ok) throw new Error('Failed to fetch spotify analytics');
+        const data = await repsonse.json();
+        setRecentPlays(data.recentPlays ?? []);
+      } catch (error) {
+        console.error('Error fetching spotify analytics:', error);
+      }
+    };
+    fetchRecentPlays();
+  }, []);
 
-    const featuredProjects = getFeaturedProjects();
-    setProjects(featuredProjects);
-    
+  useEffect(() => {
     const fetchTrips = async () => {
       try {
         const response = await fetch('/api/mountaineering', { cache: "no-store" });
-        const tripsData = await response.json();
-        setTrips(tripsData);
+        
+        const mountaineeringData = await response.json();
+        setTrips(mountaineeringData);
       } catch (error) {
-            console.error("Error fetching trips:", error);
-            setTrips([]);
-        }
-      };
-    
-    fetchTrips();
-    setLoading(false);
-
+        console.error('Error fetching mountaineering trips:', error);
+        setTrips([]);
+      }
   }, []);
+
+  const track = spotifyData?.track;
+  const isPlaying = spotifyData?.is_playing ?? false;
 
   return (
     <div className="max-w-4xl mx-auto px-6 py-16">
@@ -184,70 +207,65 @@ export default function PersonalLandingPage() {
           <div className="flex items-center gap-3 mb-6">
             <Music className="w-6 h-6 text-green-400" />
             <h2 className="text-2xl font-semibold text-white">
-              {spotifyData?.is_playing ? 'Now Playing' : 'Was Playing'}
+              {isPlaying ? 'Currently Listening' : 'Was Listening To'}
             </h2>
           </div>
           
+
           {!spotifyData ? (
             <div className="flex justify-center py-8">
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-400"></div>
             </div>
-          ) : spotifyData.is_playing && spotifyData.track ? (
+          ) : track ? (
             <div className="flex items-center gap-6">
-              {spotifyData.track.album_image_url && (
+              {track.album_image_url && (
                 <div className="flex-shrink-0">
                   <Image 
-                    src={spotifyData.track.album_image_url} 
-                    alt={`${spotifyData.track.album_name} cover`}
+                    src={track.album_image_url} 
+                    alt={`${track.album_name} cover`}
                     width={96}
                     height={96}
                     unoptimized
-                    className="w-24 h-24 rounded-full object-cover animate-spin-slow shadow-lg"
+                    className="w-24 h-24 rounded-full object-cover shadow-lg ${isPlaying ? 'animate-spin-slow' : ''}"
                   />
                 </div>
               )}
               
               <div className="flex-1 min-w-0">
                 <p className="text-2xl font-bold text-white mb-1 truncate">
-                  {spotifyData.track.track_name}
+                  {track}
                 </p>
                 <p className="text-gray-300 text-lg mb-2 truncate">
-                  {spotifyData.track.artist_name}
+                  {track.artist_name}
                 </p>
                 <p className="text-gray-400 text-sm truncate mb-3">
-                  {spotifyData.track.album_name}
+                  {track.album_name}
                 </p>
                 
                 {/* Progress bar */}
-                {spotifyData.progress_ms !== undefined && (
+                {isPlaying && spotifyData.progress_ms !== undefined && (
                   <div className="mt-3">
                     <div className="bg-white/20 rounded-full h-1.5 overflow-hidden">
-                      <div 
+                      <div
                         className="bg-green-400 h-full rounded-full transition-all duration-1000"
                         style={{ 
-                          width: `${(spotifyData.progress_ms / spotifyData.track.track_duration_ms) * 100}%` 
+                          width: `${(spotifyData.progress_ms / track.track_duration_ms) * 100}%` 
                         }}
                       />
                     </div>
                     <div className="flex justify-between text-xs text-gray-400 mt-1">
-                      <span>
-                        {Math.floor(spotifyData.progress_ms / 1000 / 60)}:
-                        {String(Math.floor((spotifyData.progress_ms / 1000) % 60)).padStart(2, '0')}
-                      </span>
-                      <span>
-                        {Math.floor(spotifyData.track.track_duration_ms / 1000 / 60)}:
-                        {String(Math.floor((spotifyData.track.track_duration_ms / 1000) % 60)).padStart(2, '0')}
-                      </span>
+                        <span>{formatTime(spotifyDate.progress_ms)}</span>
+                        <span>{formatTime(track.track_duration_ms)}</span>
                     </div>
                   </div>
                 )}
                 
                 <div className="flex items-center gap-4 mt-3">
                   <span className="text-green-400 text-sm font-semibold">
-                    {spotifyData.track.play_count} total plays
+                    {track.play_count} total plays
                   </span>
                   <a 
-                    href={spotifyData.track.track_spotify_url}
+                    href={track.track_spotify_url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-green-400 hover:text-green-300 text-sm transition-colors"
@@ -259,8 +277,7 @@ export default function PersonalLandingPage() {
             </div>
           ) : (
             <div className="text-center py-8">
-              <p className="text-gray-400 mb-4">No music playing right now</p>
-              <p className="text-gray-500 text-sm">Start playing on Spotify to see it here!</p>
+              <p classNmae="text-gray-400">No recent track data available</p>
             </div>
           )}
         </div>
@@ -274,21 +291,21 @@ export default function PersonalLandingPage() {
             <h2 className="text-2xl font-semibold text-white">Recently Played</h2>
           </div>
           
-          {!spotifyData ? (
+          {!recentPlays ? (
             <div className="flex justify-center py-8">
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
             </div>
-          ) : spotifyData.tracks && spotifyData.tracks.length > 0 ? (
+          ) : recentPlays.length > 0 ? (
             <div className="space-y-3">
-              {spotifyData.tracks.slice(0, 3).map((track) => (
+              {recentPlays.slice(0, 3).map((play) => (
                 <div 
-                  key={track.track_id} 
+                  key={play.played_at} 
                   className="flex items-center p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-all hover:scale-[1.02] border border-white/10 gap-4"
                 >
-                  {track.album_image_url && (
+                  {play.album_image_url && (
                     <Image 
-                      src={track.album_image_url} 
-                      alt={`${track.album_name} cover`}
+                      src={play.album_image_url} 
+                      alt={`${play.album_name} cover`}
                       width={48}
                       height={48}
                       unoptimized
@@ -297,9 +314,9 @@ export default function PersonalLandingPage() {
                   )}
                   
                   <div className="flex-1 min-w-0">
-                    <p className="text-white font-medium truncate">{track.track_name}</p>
+                    <p className="text-white font-medium truncate">{play.track_name}</p>
                     <p className="text-gray-400 text-sm truncate">
-                      {track.artist_name} • {track.album_name}
+                      {play.artist_name} • {play.album_name}
                     </p>
                   </div>
                 </div>
