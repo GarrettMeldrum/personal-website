@@ -6,6 +6,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 
+
+
 type Track = {
   track_id: string;
   track_name: string;
@@ -51,6 +53,7 @@ type Trip = {
 };
 
 const POLL_INTERVAL = 3000;
+const RECENT_POLL_INTERVAL = 30000;
 
 function formatTime(ms: number) {
   const minutes = Math.floor(ms / 1000 / 60);
@@ -65,36 +68,44 @@ export default function PersonalLandingPage() {
   const [trips, setTrips] = useState<Trip[]>([]);
   const [loading, setLoading] = useState(true);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const recentPlaysIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  // pulling spotify data
+  // fetch the currently-playing /api hook every 3 seconds to keep the data up to date
   useEffect(() => {
     const fetchSpotify = async () => {
       try {
-        const response = await fetch('/api/currently-playing', { cache: "no-store", signal: AbortSignal.timeout(5000) });
-        const result = await response.json();
+        const response = await fetch('/api/currently-playing', { cache: "no-store" });
+        const currentlyPlayingData = await response.json(); 
+        setSpotifyData(currentlyPlayingData);     
+      } catch (error) {console.error('Error fetching currently playing:', error);};
+    fetchSpotify();
+    const interval = setInterval(fetchSpotify, POLL_INTERVAL);
+    return () => clearInterval(interval);
+  }, []);
 
-        setSpotifyData((prev) => {
-          if (!result.track && prev?.track) {
-            return { ...result, track: prev.track };
-          }
-          return result;
-        });
-
+  useEffect(() => {
+    const fetchRecentPlays = async () => {
+      try{
+        const response = await fetch('/api/spotify-analytics', { cache: "no-store", signal: AbortSignal.timeout(5000) });
+        if (!response.ok) throw new Error('Failed to fetch spotify analytics');
+        const data = await response.json();
+        setRecentPlays(data.recent_plays ?? []);
       } catch (error) {
-        console.error('Error fetching currently playing:', error);
+        console.error('Error fetching spotify analytics:', error);
       }
     };
-
+    
     const startPolling = () => {
-      fetchSpotify();
-      intervalRef.current = setInterval(fetchSpotify, POLL_INTERVAL);
+      fetchRecentPlays();
+      recentPlaysIntervalRef.current = setInterval(fetchRecentPlays, RECENT_POLL_INTERVAL); 
     };
 
     const stopPolling = () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-        intervalRef.current = null;
+      if (recentPlaysIntervalRef.current) {
+        clearInterval(recentPlaysIntervalRef.current);
+        recentPlaysIntervalRef.current = null;
       }
+    
     };
 
     const handleVisibilityChange = () => {
@@ -112,20 +123,8 @@ export default function PersonalLandingPage() {
       stopPolling();
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
-  }, []);
 
-  useEffect(() => {
-    const fetchRecentPlays = async () => {
-      try{
-        const response = await fetch('/api/spotify-analytics', { cache: "no-store"});
-        if (!response.ok) throw new Error('Failed to fetch spotify analytics');
-        const data = await response.json();
-        setRecentPlays(data.recent_plays ?? []);
-      } catch (error) {
-        console.error('Error fetching spotify analytics:', error);
-      }
-    };
-    fetchRecentPlays();
+
   }, []);
 
   useEffect(() => {
@@ -206,12 +205,11 @@ export default function PersonalLandingPage() {
 
       {/* Now Playing Section - Always visible */}
       <section className="mb-8">
-        <div className="bg-gradient-to-br from-green-500/20 to-blue-500/20 backdrop-blur-lg rounded-2xl p-6 border border-green-400/30 shadow-2xl">
+        <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-2xl">
           <div className="flex items-center gap-3 mb-6">
             <Music className="w-6 h-6 text-green-400" />
-            <h2 className="text-2xl font-semibold text-white">
-              {isPlaying ? 'Currently Listening' : 'Was Listening To'}
-            </h2>
+            <h2 className="text-2xl font-semibold text-white">Spotify Player</h2>
+            {}
           </div>
           
 
