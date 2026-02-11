@@ -77,7 +77,7 @@ export default function PersonalLandingPage() {
         const response = await fetch('/api/currently-playing', { cache: "no-store" });
         const currentlyPlayingData = await response.json(); 
         setSpotifyData(currentlyPlayingData);     
-      } catch (error) {console.error('Error fetching currently playing:', error);};
+      } catch (error) {console.error('Error fetching currently playing:', error);}};
     fetchSpotify();
     const interval = setInterval(fetchSpotify, POLL_INTERVAL);
     return () => clearInterval(interval);
