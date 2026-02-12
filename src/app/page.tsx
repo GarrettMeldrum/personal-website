@@ -67,7 +67,6 @@ export default function PersonalLandingPage() {
   const [projects] = useState<Project[]>(getFeaturedProjects());
   const [trips, setTrips] = useState<Trip[]>([]);
   const [loading, setLoading] = useState(true);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const recentPlaysIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
   // fetch the currently-playing /api hook every 3 seconds to keep the data up to date
