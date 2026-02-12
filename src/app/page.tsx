@@ -4,6 +4,8 @@ import { Music, Code, Github, Mountain, Linkedin, Clock } from 'lucide-react';
 import { getFeaturedProjects } from '@/data/projects';
 import Image from 'next/image';
 import Link from 'next/link';
+import fs from 'fs';
+import path from 'path';
 
 
 
@@ -44,13 +46,6 @@ type Project = {
   featured: boolean;
 };
 
-type Trip = {
-  id: string;
-  peak: string;
-  elevation: string;
-  route: string;
-  date: string;
-};
 
 const POLL_INTERVAL = 3000;
 const RECENT_POLL_INTERVAL = 30000;
@@ -61,6 +56,25 @@ function formatTime(ms: number) {
   return `${minutes}:${String(seconds).padStart(2, '0')}`;
 }
 
+async function fetchTrips() {
+  const postsDir = path.join(process.cwd(), 'content/mountaineering');
+  const filenames = fs.readdirSync(postsDir);
+
+  return filenames
+    .filter(filename => filename.endswith('.md'))
+    .map(filename => {
+      const filePath = path.join(postsDir, filename);
+      const fileContents = fs.readFileSync(filePath, 'utf-8');
+      const { data } = matter(fileContents);
+
+      return {
+        slug: filename.replace('.md', ''),
+        ...data
+      };
+    });
+}
+
+
 export default function PersonalLandingPage() {
   const [spotifyData, setSpotifyData] = useState<CurrentlyPlaying | null>(null);
   const [recentPlays, setRecentPlays] = useState<RecentPlay[] | null>(null);
@@ -69,19 +83,21 @@ export default function PersonalLandingPage() {
   const [loading, setLoading] = useState(true);
   const recentPlaysIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  // fetch the currently-playing /api hook every 3 seconds to keep the data up to date
+  // fetch the currently playing /api hook every POLL_INTERVAL seconds to keep the data up to date, and also on initial load
   useEffect(() => {
     const fetchSpotify = async () => {
       try {
         const response = await fetch('/api/currently-playing', { cache: "no-store" });
         const currentlyPlayingData = await response.json(); 
         setSpotifyData(currentlyPlayingData);     
-      } catch (error) {console.error('Error fetching currently playing:', error);}};
+      } catch (error) {console.error('Error fetching currently playing:', error);}
+    };
     fetchSpotify();
     const interval = setInterval(fetchSpotify, POLL_INTERVAL);
     return () => clearInterval(interval);
   }, []);
 
+  // fetch the recently played /api hook every RECENT_POLL_INTERVAL seconds to keep the data up to date, and also on initial load
   useEffect(() => {
     const fetchRecentPlays = async () => {
       try{
@@ -89,61 +105,17 @@ export default function PersonalLandingPage() {
         if (!response.ok) throw new Error('Failed to fetch spotify analytics');
         const data = await response.json();
         setRecentPlays(data.recent_plays ?? []);
-      } catch (error) {
-        console.error('Error fetching spotify analytics:', error);
-      }
+      } catch (error) {console.error('Error fetching spotify analytics:', error);}
     };
-    
-    const startPolling = () => {
-      fetchRecentPlays();
-      recentPlaysIntervalRef.current = setInterval(fetchRecentPlays, RECENT_POLL_INTERVAL); 
-    };
-
-    const stopPolling = () => {
-      if (recentPlaysIntervalRef.current) {
-        clearInterval(recentPlaysIntervalRef.current);
-        recentPlaysIntervalRef.current = null;
-      }
-    
-    };
-
-    const handleVisibilityChange = () => {
-      if (document.hidden) {
-        stopPolling();
-      } else {
-        startPolling();
-      }
-    };
-
-    startPolling();
-    document.addEventListener('visibilitychange', handleVisibilityChange);
-
-    return () => {
-      stopPolling();
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
-    };
-
-
+    fetchRecentPlays();
+    const interval = setInterval(fetchRecentPlays, RECENT_POLL_INTERVAL);
+    return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
-    const fetchTrips = async () => {
-      try {
-        const response = await fetch('/api/mountaineering', { cache: "no-store" });
-        const mountaineeringData = await response.json();
-        setTrips(mountaineeringData);
-      } catch (error) {
-        console.error('Error fetching mountaineering trips:', error);
-        setTrips([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchTrips();
-  }, []);
 
   const track = spotifyData?.track;
   const isPlaying = spotifyData?.is_playing ?? false;
+  const mountaineeringTrips = await fetchTrips();
 
   return (
     <div className="max-w-4xl mx-auto px-6 py-16">
@@ -390,37 +362,31 @@ export default function PersonalLandingPage() {
             <h2 className="text-2xl font-semibold text-white">Mountaineering</h2>
           </div>
           
-          {loading ? (
-            <div className="flex justify-center py-8">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
-            </div>
-          ) : (
-            <div className="space-y-4">
-              {trips.slice(0, 3).map((trip) => (
-                <Link
-                  key={trip.id}
-                  href={`/mountaineering/${trip.id}`}
-                  className="block p-5 bg-white/5 rounded-lg hover:bg-white/10 transition-all hover:scale-[1.02] border border-white/10 cursor-pointer group"
-                >
-                  <div className="flex items-start justify-between mb-2">
-                    <h3 className="text-xl font-semibold text-white">{trip.peak}</h3>
-                    <span className="text-orange-400 text-sm font-semibold">{trip.elevation}</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-gray-300 text-sm">{trip.route}</span>
-                    <span className="text-gray-400 text-sm">{trip.date}</span>
-                  </div>
+          { /* Individual mountaineering trip cards */}
+          <div>
+            {
+              mountaineeringTrips.map(trip => (
+                <Link key={trip.id} href={'/mountaineering/${trip.slug}'}>
+                  <article>
+
+                    { /* Mountain name(s) and elevation*/}
+                    <div className="flex justify-between items-baseline mb-2">
+                      <h2>{trip.peak}</h2>
+                      <h2>{trip.elevation}</h2>
+                    </div>
+
+
+                    { /* Route name and date */ }
+                    <div className="flex justify-between items-center text-sm text-gray-400">
+                      <h2>{trip.route}</h2>
+                      <h2>{trip.date}</h2>
+                    </div>
+
+                  </article>
                 </Link>
               ))}
-              <Link 
-                href="/mountaineering"
-                className="block text-center py-2 text-sm text-orange-400 hover:text-orange-300 transition-colors"
-              >
-                View all trips →
-              </Link>
-            </div>
-          )}
-        </div>
+          </div>    
+        
       </section>
     </div>
   );
