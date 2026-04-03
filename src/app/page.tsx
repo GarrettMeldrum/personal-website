@@ -1,17 +1,10 @@
 "use client";
 
-<<<<<<< HEAD
 import { useState, useEffect } from "react";
 import { Music, Code, Github, Mountain, Linkedin, Clock } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-=======
-import { useState, useEffect } from 'react';
-import { Music, Code, Github, Mountain, Linkedin, Clock } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { getFeaturedProjects } from '@/data/projects';
->>>>>>> 97cb47c (getting up to date with server)
+import { getFeaturedProjects } from "@/data/projects";
 
 const CURRENTLY_LISTENING_POLL = 3000;
 const RECENT_LISTENS_POLL = 30000;
@@ -35,14 +28,9 @@ export default function Page() {
   useEffect(() => {
     const fetchCurrent = async () => {
       try {
-<<<<<<< HEAD
-        const res = await fetch(
-          "https://api.garrettmeldrum.com/currently-playing",
-          { cache: "no-store" },
-        );
-=======
-        const res = await fetch('/api/currently-playing', { cache: 'no-store' });
->>>>>>> 97cb47c (getting up to date with server)
+        const res = await fetch("/api/currently-playing", {
+          cache: "no-store",
+        });
         if (res.ok) setSpotifyData(await res.json());
       } catch (e) {
         console.error(e);
@@ -56,14 +44,7 @@ export default function Page() {
   useEffect(() => {
     const fetchRecent = async () => {
       try {
-<<<<<<< HEAD
-        const res = await fetch(
-          "https://api.garrettmeldrum.com/recently-played",
-          { cache: "no-store" },
-        );
-=======
-        const res = await fetch('/api/recently-played', { cache: 'no-store' });
->>>>>>> 97cb47c (getting up to date with server)
+        const res = await fetch("/api/recently-played", { cache: "no-store" });
         if (res.ok) setRecentPlays(await res.json());
       } catch (e) {
         console.error(e);
@@ -77,17 +58,8 @@ export default function Page() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-<<<<<<< HEAD
-        const [projectsRes, tripsRes] = await Promise.all([
-          fetch("https://api.garrettmeldrum.com/projects"),
-          fetch("https://api.garrettmeldrum.com/mountaineering"),
-        ]);
-        if (projectsRes.ok) setProjects(await projectsRes.json());
-        if (tripsRes.ok) setMountaineeringTrips(await tripsRes.json());
-=======
-        const res = await fetch('/api/mountaineering');
+        const res = await fetch("/api/mountaineering");
         if (res.ok) setMountaineeringTrips(await res.json());
->>>>>>> 97cb47c (getting up to date with server)
       } catch (e) {
         console.error(e);
       } finally {
@@ -369,7 +341,8 @@ export default function Page() {
               ))}
               <Link
                 href="/mountaineering"
-                className="block text-center py-2 text-sm text-blue-400 hover:text-blue-300 transition-colors">
+                className="block text-center py-2 text-sm text-blue-400 hover:text-blue-300 transition-colors"
+              >
                 View All Mountaineering Trips →
               </Link>
             </div>
