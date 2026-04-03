@@ -24,6 +24,7 @@ export async function GET() {
       
       return {
         id: filename.replace('.md', ''),
+        slug: data.slug || filename.replace('.md', ''),
         peak: data.peak,
         elevation: data.elevation,
         route: data.route,

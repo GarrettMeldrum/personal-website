@@ -24,7 +24,7 @@ export function getAllPosts(): Post[] {
 
     return {
       ...(data as Post),
-      slug: data.slug,
+      slug: data.slug || filename.replace(/\.md$/, ''),
       image: typeof data.image === 'string' && data.image.trim() !== ''
         ? data.image
         : '/images/mountaineering/default.jpg',
