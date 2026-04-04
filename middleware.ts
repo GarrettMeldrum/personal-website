@@ -1,9 +1,16 @@
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
-  if (request.nextUrl.pathname.includes('.git')) {
-    return new NextResponse('Forbidden', { status: 403 });
+  const path = request.nextUrl.pathname;
+  if (
+    path.includes(".git") ||
+    path.includes(".php") ||
+    path.includes("/wp-") ||
+    path.includes("/cgi-bin") ||
+    path.includes(".env")
+  ) {
+    return new NextResponse("Forbidden", { status: 403 });
   }
   return NextResponse.next();
 }

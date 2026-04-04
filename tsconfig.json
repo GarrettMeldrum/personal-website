@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ES2017",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "types": ["next/types/global", "node"],
+    "types": ["next/types/global", "node", "react"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
