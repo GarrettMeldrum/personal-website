@@ -39,7 +39,7 @@ export async function GET(request: Request) {
 
     return Response.json(tracks);
   } catch {
-    console.error("Error fetching recently played:", e);
+    console.error("Error fetching recently played:");
     return Response.json(
       { error: "Failed to fetch recently played" },
       { status: 500 },

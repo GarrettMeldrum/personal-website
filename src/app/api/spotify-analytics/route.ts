@@ -111,7 +111,7 @@ export async function GET() {
       recent_plays: recentPlays,
     });
   } catch {
-    console.error("Error fetching analytics:", e);
+    console.error("Error fetching analytics:");
     return Response.json(
       { error: "Failed to fetch analytics" },
       { status: 500 },
