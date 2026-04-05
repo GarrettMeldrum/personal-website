@@ -56,7 +56,8 @@ export async function GET() {
 
     const topTracksWithArtists = topTracks.map((track) => ({
       ...track,
-      artist_name: getArtist.get(track.track_id)?.artist_name ?? "Unknown",
+      artist_name:
+        (getArtist.get(track.track_id) as any)?.artist_name ?? "Unknown",
     }));
 
     const topArtists = db
