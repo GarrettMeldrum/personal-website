@@ -78,7 +78,7 @@ export async function GET() {
         play_count: playcount?.count ?? 0,
       },
     });
-  } catch (e) {
+  } catch {
     return Response.json({ error: "Failed to fetch" }, { status: 500 });
   }
 }

@@ -110,7 +110,7 @@ export async function GET() {
       top_artists: topArtists,
       recent_plays: recentPlays,
     });
-  } catch (e) {
+  } catch {
     console.error("Error fetching analytics:", e);
     return Response.json(
       { error: "Failed to fetch analytics" },

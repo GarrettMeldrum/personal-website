@@ -38,7 +38,7 @@ export async function GET(request: Request) {
     db.close();
 
     return Response.json(tracks);
-  } catch (e) {
+  } catch {
     console.error("Error fetching recently played:", e);
     return Response.json(
       { error: "Failed to fetch recently played" },
