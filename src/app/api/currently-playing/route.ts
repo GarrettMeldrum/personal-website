@@ -1,40 +1,84 @@
 // app/api/currently-playing/route.ts
-import { NextResponse } from "next/server";
+import Database from "better-sqlite3";
+import path from "path";
 
-export const dynamic = "force-dynamic";
-export const runtime = "nodejs";
+const dbPath = path.join(process.cwd(), "data", "spotify-listens.db");
 
-const API_BASE = process.env.API_BASE;
-const CLIENT_ID = process.env.CLIENT_ID;
-const CLIENT_SECRET = process.env.CLIENT_SECRET;
+async function getAccessToken() {
+  const res = await fetch("https://accounts.spotify.com/api/token", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      Authorization: `Basic ${Buffer.from(`${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`).toString("base64")}`,
+    },
+    body: new URLSearchParams({
+      grant_type: "refresh_token",
+      refresh_token: process.env.SPOTIFY_REFRESH_TOKEN!,
+    }),
+  });
+
+  const data = await res.json();
+  return data.access_token;
+}
 
 export async function GET() {
   try {
-    const response = await fetch(`${API_BASE}/currently-playing`, {
-      headers: {
-        "CF-Access-Client-Id": CLIENT_ID!,
-        "CF-Access-Client-Secret": CLIENT_SECRET!,
-        Accept: "application/json",
-      },
-      cache: "no-store",
-    });
+    const token = await getAccessToken();
 
-    if (!response.ok) {
-      console.error(`API error: ${response.status}`);
-      return NextResponse.json(
-        { error: "Failed to fetch currently playing" },
-        { status: response.status }
-      );
+    const res = await fetch(
+      "https://api.spotify.com/v1/me/player/currently-playing",
+      { headers: { Authorization: `Bearer ${token}` } },
+    );
+
+    if (res.status === 204 || !res.ok) {
+      const db = new Database(dbPath, { readonly: true });
+
+      const track = db
+        .prepare(
+          `
+        SELECT 
+          t.track_name, t.track_spotify_url, t.track_duration_ms,
+          t.track_id,
+          ar.artist_name, a.album_name, a.album_image_url, t.played_at,
+          (SELECT COUNT(*) FROM tracks t2 WHERE t2.track_id = t.track_id) as play_count
+        FROM tracks t
+        JOIN albums a ON t.album_id = a.album_id
+        JOIN track_artists ta ON t.played_at = ta.played_at
+        JOIN artists ar ON ta.artist_id = ar.artist_id
+        WHERE ta.artist_position = 0
+        ORDER BY t.played_at DESC
+        LIMIT 1
+        `,
+        )
+        .get();
+      db.close();
+
+      return Response.json({ is_playing: false, track });
     }
 
-    const data = await response.json();
-    return NextResponse.json(data);
-    
-  } catch (error) {
-    console.error("Error fetching currently playing:", error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    const data = await res.json();
+    const track = data.item;
+
+    const db = new Database(dbPath, { readonly: true });
+    const playcount = db
+      .prepare("SELECT COUNT(*) as count FROM tracks WHERE track_id = ?")
+      .get(track.id) as any;
+    db.close();
+
+    return Response.json({
+      is_playing: true,
+      progress_ms: data.progress_ms,
+      track: {
+        track_name: track.name,
+        artist_name: track.artists.map((a: any) => a.name).join(", "),
+        album_name: track.album.name,
+        album_image_url: track.album.images[0]?.url,
+        track_duration_ms: track.duration_ms,
+        track_spotify_url: track.external_urls.spotify,
+        play_count: playcount?.count ?? 0,
+      },
+    });
+  } catch (e) {
+    return Response.json({ error: "Failed to fetch" }, { status: 500 });
   }
 }
