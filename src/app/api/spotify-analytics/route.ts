@@ -4,7 +4,7 @@ import path from "path";
 
 export const dynamic = "force-dynamic";
 
-const dbPath = path.join(process.cwd(), "data", "listens.db");
+const dbPath = path.join(process.cwd(), "data", "spotify-listens.db");
 
 export async function GET() {
   try {

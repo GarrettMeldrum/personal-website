@@ -4,7 +4,7 @@ import path from "path";
 
 export const dynamic = "force-dynamic";
 
-const dbPath = path.join(process.cwd(), "data", "spotify-listens");
+const dbPath = path.join(process.cwd(), "data", "spotify-listens.db");
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -38,8 +38,8 @@ export async function GET(request: Request) {
     db.close();
 
     return Response.json(tracks);
-  } catch {
-    console.error("Error fetching recently played:");
+  } catch (e) {
+    console.error("Error fetching recently played:", e);
     return Response.json(
       { error: "Failed to fetch recently played" },
       { status: 500 },
