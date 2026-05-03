@@ -1,7 +1,15 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Music, Code, Github, Mountain, Linkedin, Clock } from "lucide-react";
+import {
+  Music,
+  Code,
+  Github,
+  Mountain,
+  Linkedin,
+  Clock,
+  FileText,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { getFeaturedProjects } from "@/data/projects";
@@ -117,13 +125,13 @@ export default function Page() {
               <span className="text-sm text-gray-300">LeetCode</span>
             </Link>
             <Link
-              href="https://alltrails.com/members/garrett-meldrum"
+              href="/resume"
               target="_blank"
               rel="noopener noreferrer"
               className="flex flex-col items-center p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-all hover:scale-[1.02] border border-white/10"
             >
-              <Mountain className="w-8 h-8 text-green-400 mb-2" />
-              <span className="text-sm text-gray-300">AllTrails</span>
+              <FileText className="w-8 h-8 text-green-400 mb-2" />
+              <span className="text-sm text-gray-300">Resume</span>
             </Link>
           </div>
         </div>
