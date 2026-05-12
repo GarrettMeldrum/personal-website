@@ -9,6 +9,8 @@ import {
   Linkedin,
   Clock,
   FileText,
+  Image as LucideImage,
+  Tv,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -90,7 +92,6 @@ export default function Page() {
           homebrewing.
         </p>
       </header>
-
       <section className="mb-8">
         <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-2xl">
           <h2 className="text-2xl font-semibold text-white mb-6">
@@ -136,7 +137,34 @@ export default function Page() {
           </div>
         </div>
       </section>
+      <section className="mb-8">
+        <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-2xl">
+          <h2 className="text-2xl font-semibold text-white mb-6">
+            Family Portals
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <Link
+              href="/photos"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-col items-center p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-all hover:scale-[1.02] border border-white/10"
+            >
+              <LucideImage className="w-8 h-8 text-white mb-2" />
+              <span className="text-sm text-gray-300">Photos</span>
+            </Link>
 
+            <Link
+              href="https://garrettmeldrum.com/plex"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-col items-center p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-all hover:scale-[1.02] border border-white/10"
+            >
+              <Tv className="w-8 h-8 text-blue-400 mb-2" />
+              <span className="text-sm text-gray-300">Plex</span>
+            </Link>
+          </div>
+        </div>
+      </section>
       <section className="mb-8">
         <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-2xl">
           <div className="flex items-center gap-3 mb-6">
@@ -214,7 +242,6 @@ export default function Page() {
           )}
         </div>
       </section>
-
       <section className="mb-8">
         <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-2xl">
           <div className="flex items-center gap-3 mb-6">
@@ -265,7 +292,6 @@ export default function Page() {
           )}
         </div>
       </section>
-
       <section className="mb-8">
         <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-2xl">
           <div className="flex items-center gap-3 mb-6">
@@ -315,7 +341,6 @@ export default function Page() {
           )}
         </div>
       </section>
-
       <section>
         <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-2xl">
           <div className="flex items-center gap-3 mb-6">
